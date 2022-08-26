@@ -1,3 +1,69 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+    [type="text"],
+    [type="email"],
+    [type="url"],
+    [type="password"],
+    [type="number"],
+    [type="date"],
+    [type="datetime-local"],
+    [type="month"],
+    [type="search"],
+    [type="tel"],
+    [type="time"],
+    [type="week"],
+    [type="file"],
+    [multiple],
+    textarea,
+    select {
+        @apply w-full border rounded-md shadow-sm border-secondary-300 focus:border-secondary-300 focus:ring focus:ring-secondary-200 bg-gray-50 text-secondary-500 focus:ring-opacity-50 dark:focus:ring-1;
+    }
+    [type="checkbox"],
+    [type="radio"] {
+        @apply rounded shadow-sm text-secondary-500 border-secondary-300 focus:border-secondary-300 focus:ring focus:ring-secondary-200 focus:ring-opacity-50;
+    }
+
+    label {
+        @apply block font-semibold text-secondary-700;
+    }
+}
+
+@layer components {
+    /* Button */
+    .btn-primary {
+        @apply px-4 py-2 text-sm font-bold text-white rounded-md hover:shadow-md hover:shadow-primary-50 bg-primary-500;
+    }
+
+    .btn-secondary {
+        @apply px-4 py-2 text-sm font-bold text-white rounded-md hover:shadow-md hover:shadow-secondary-300 bg-secondary-500;
+    }
+
+    .btn-warning {
+        @apply px-4 py-2 text-sm font-bold text-white rounded-md hover:shadow-md hover:shadow-warning-300 bg-warning-500;
+    }
+
+    .btn-danger {
+        @apply px-4 py-2 text-sm font-bold text-white rounded-md hover:shadow-md hover:shadow-danger-300 bg-danger-500;
+    }
+
+    .btn-success {
+        @apply px-4 py-2 text-sm font-bold text-white rounded-md hover:shadow-md hover:shadow-success-300 bg-success-500;
+    }
+
+    .btn-icon {
+        @apply flex flex-row items-center;
+    }
+
+    /* Card */
+    .card {
+        @apply bg-white border rounded-lg shadow-md sm:p-8 dark:bg-gray-800 dark:border-gray-700;
+    }
+
+    /* Eror */
+    .error {
+        @apply text-xs text-red-700;
+    }
+}

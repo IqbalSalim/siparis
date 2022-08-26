@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Livewire\User\IndexUser;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -21,4 +22,8 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
 
-require __DIR__.'/auth.php';
+Route::group(['prefix' => '', 'middleware' => 'auth'], function () {
+    Route::get('user', IndexUser::class)->middleware(['can:olah user'])->name('user');
+});
+
+require __DIR__ . '/auth.php';
