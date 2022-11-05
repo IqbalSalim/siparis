@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Livewire\Arsip\CreateArsip;
+use App\Http\Livewire\Arsip\IndexArsip;
 use App\Http\Livewire\User\IndexUser;
 use Illuminate\Support\Facades\Route;
 
@@ -24,6 +26,12 @@ Route::get('/dashboard', function () {
 
 Route::group(['prefix' => '', 'middleware' => 'auth'], function () {
     Route::get('user', IndexUser::class)->middleware(['can:olah user'])->name('user');
+    // Route::get('arsip', IndexArsip::class)->middleware(['can:olah arsip'])->name('arsip');
+
+    Route::group(['prefix' => '/arsip', 'as' => 'arsip'], function () {
+        Route::get('/', IndexArsip::class)->middleware(['can:olah arsip'])->name('');
+        Route::get('/create', CreateArsip::class)->middleware(['can:olah arsip'])->name('.create');
+    });
 });
 
 require __DIR__ . '/auth.php';

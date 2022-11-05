@@ -12,13 +12,18 @@
                 </div>
 
                 <!-- Navigation Links -->
-                <div class="hidden space-x-8  sm:-my-px sm:ml-10 sm:flex">
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
                     </x-nav-link>
                     @can('olah user')
                         <x-nav-link :href="route('user')" :active="request()->routeIs('user')">
                             {{ __('User') }}
+                        </x-nav-link>
+                    @endcan
+                    @can('olah arsip')
+                        <x-nav-link :href="route('arsip')" :active="request()->routeIs('arsip')">
+                            {{ __('Arsip') }}
                         </x-nav-link>
                     @endcan
                 </div>
