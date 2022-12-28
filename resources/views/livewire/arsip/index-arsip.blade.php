@@ -1,31 +1,32 @@
-<div x-cloak x-data="{ editModal: false }" x-on:close-edit-modal="editModal=false">
+<div x-cloak x-data="{ editModal: false, modalUploadImage:false }" x-on:close-edit-modal="editModal=false"
+    x-on:close-modal-upload="modalUploadImage=false">
     <x-slot name="header">
         <h2 class="text-xl font-semibold leading-tight text-primary-500 dark:text-white">
-            {{ __('User') }}
+            {{ __('Arsip') }}
         </h2>
         <div class="flex flex-row space-x-1 text-sm text-primary-200">
             <div class="hover:text-primary"><a href="/dashboard">Dashboard</a></div>
             <div>-</div>
-            <div>User</div>
+            <div>Arsip</div>
         </div>
     </x-slot>
 
-
+    <livewire:arsip.modal-upload-image />
     <div id="content">
         {{-- Tabel User --}}
         <div class="relative overflow-x-auto border shadow-md sm:rounded-lg dark:border-gray-700">
             <div class="p-4 bg-white dark:bg-gray-800">
                 <div class="flex flex-row items-center justify-between">
                     <div>
-                        <h2 class="mb-2 text-xl font-semibold text-primary-500 dark:text-white">Daftar User</h2>
+                        <h2 class="mb-2 text-xl font-semibold text-primary-500 dark:text-white">Daftar Arsip</h2>
                     </div>
-                    <a href="{{ route('arsip.create') }}" class="btn-primary btn-icon">
+                    <button @click="modalUploadImage=true" class="btn-primary btn-icon">
                         <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 mr-1 -ml-1" fill="none"
                             viewBox="0 0 24 24" stroke="currentColor" stroke-width="3">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
                         </svg>
                         Tambah
-                    </a>
+                    </button>
                 </div>
                 <div class="flex flex-row items-center justify-between mt-2">
                     <div>
