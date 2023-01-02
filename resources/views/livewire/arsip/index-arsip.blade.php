@@ -12,6 +12,9 @@
     </x-slot>
 
     <livewire:arsip.modal-upload-image />
+
+
+
     <div id="content">
         {{-- Tabel User --}}
         <div class="relative overflow-x-auto border shadow-md sm:rounded-lg dark:border-gray-700">
@@ -100,7 +103,7 @@
                             {{ $row->email }}
                         </td>
                         <td class="px-6 py-4 font-bold uppercase text-secondary-500">
-                            {{ $row->getRoleNames()[0] }}
+
                         </td>
                         <td class="px-6 py-4 text-right">
                             <button @click="editModal=true" wire:click.prevent="$emit('getUser', {{ $row->id }})"

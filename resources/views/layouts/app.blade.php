@@ -50,6 +50,18 @@
             });
         });
 
+        window.addEventListener('swal:success-redirect', event => {
+            swal({
+                title: event.detail.message,
+                text: event.detail.text,
+                icon: event.detail.type,
+                buttons: false,
+                timer: 1500,
+            }).then(()=>{
+                window.location.href=event.detail.url
+            })
+        });
+
         window.addEventListener('swal:error', event => {
             swal({
                 title: event.detail.message,

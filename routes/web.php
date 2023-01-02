@@ -31,7 +31,7 @@ Route::group(['prefix' => '', 'middleware' => 'auth'], function () {
 
     Route::group(['prefix' => '/arsip', 'as' => 'arsip'], function () {
         Route::get('/', IndexArsip::class)->middleware(['can:olah arsip'])->name('');
-        Route::get('/create', CreateArsip::class)->middleware(['can:olah arsip'])->name('.create');
+        Route::get('/create/{idImage}', CreateArsip::class)->middleware(['can:olah arsip'])->name('.create');
     });
 });
 

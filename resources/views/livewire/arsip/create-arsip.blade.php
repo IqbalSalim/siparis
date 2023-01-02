@@ -14,40 +14,72 @@
 
 
     <div id="content">
+        <div class="text-right py-2">
+            <a href="{{ route('arsip') }}" class="inline-flex btn-secondary space-x-1">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                    stroke="currentColor" class="w-4 h-4">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M9 15L3 9m0 0l6-6M3 9h12a6 6 0 010 12h-3" />
+                </svg>
+                <span>Kembali</span>
+            </a>
+        </div>
         <div class="flex flex-row space-x-8">
-            <div class="w-full p-4 bg-white rounded-lg shadow-lg">
-                <table>
+            <div class="w-1/2 p-4 bg-white rounded-lg shadow-lg">
+                <h3 class=" text-xl font-bold text-primary-500 ">Cover File</h3>
+                <p class="mb-4 text-secondary-500">Periksa Kembali Inputan Cover File</p>
+                <table class="w-full pt-4">
                     <tr
                         class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                        <th class="">Nama Pihak I</th>
-                        <td><input type="text" name="pihakPertama" wire:model.defer='pihakPertama'></td>
+                        <th class="w-2/5">Nama Pihak I</th>
+                        <td class="w-full"><input type="text" name="pihakPertama" class="my-1"
+                                wire:model.defer='pihakPertama'>
+                        </td>
                     </tr>
                     <tr
                         class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                         <th>Nama Pihak II</th>
-                        <td><input type="text" name="pihakKedua" wire:model.defer='pihakKedua'></td>
+                        <td><input type="text" name="pihakKedua" class="my-1" wire:model.defer='pihakKedua'></td>
                     </tr>
                     <tr
                         class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                         <th>Judul Akta</th>
-                        <td><input type="text" name="judulAkta" wire:model.defer='judulAkta'></td>
+                        <td><input type="text" class="my-1" name="judulAkta" wire:model.defer='judulAkta'></td>
                     </tr>
                     <tr
                         class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                         <th>No Akta</th>
-                        <td><input type="text" name="noAkta" wire:model.defer='noAkta'></td>
+                        <td><input type="text" class="my-1" name="noAkta" wire:model.defer='noAkta'></td>
                     </tr>
                     <tr
                         class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                         <th>Tanggal Akta</th>
-                        <td><input type="text" name="tanggalAkta" wire:model.defer='tanggalAkta'></td>
+                        <td><input type="text" class="my-1" name="tanggalAkta" wire:model.defer='tanggalAkta'></td>
                     </tr>
                     <tr
                         class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                         <th>Jenis</th>
-                        <td><input type="text" name="jenis" wire:model.defer='jenis'></td>
+                        <td><input type="text" class="my-1" name="jenis" wire:model.defer='jenis'></td>
                     </tr>
                 </table>
+            </div>
+            <div class="w-1/2 p-4 bg-white rounded-lg shadow-lg">
+                <h3 class="mb-4 text-xl font-bold text-primary-500 ">Upload File Arsip</h3>
+
+                <div class="flex flex-col space-y-4">
+                    <div>
+                        <label for="nama">File Arsip</label>
+                        <input type="file" wire:model.defer='fileArsip' class="mt-1">
+                        <span class="text-xs text-red-700">
+                            @error('name')
+                            {{ $message }}
+                            @enderror
+                        </span>
+                    </div>
+
+                    <button type="button" wire:click.defer='uploadFile'
+                        class="w-full mt-2 text-base btn-primary">Upload</button>
+
+                </div>
             </div>
         </div>
     </div>

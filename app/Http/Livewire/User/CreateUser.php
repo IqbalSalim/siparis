@@ -13,6 +13,7 @@ class CreateUser extends Component
 {
     public $name, $email;
 
+
     public function render()
     {
         return view('livewire.user.create-user');

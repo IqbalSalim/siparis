@@ -11,7 +11,7 @@ class ModalUploadImage extends Component
     use WithFileUploads;
 
     public $fileCover;
-    private $textOCR;
+    public $textOCR;
 
     public function render()
     {
@@ -30,10 +30,9 @@ class ModalUploadImage extends Component
             ]
         );
 
-        $nameFileCover = $this->fileCover->store('files', 'public');
-        $this->textOCR = new TesseractOCR(public_path('storage/' . $nameFileCover));
-        $text = $this->textOCR->run();
-        return redirect()->route('arsip.create')->with('text', $text);
+        $nameFileCover = $this->fileCover->store('cover', 'public');
+        $idImage = substr($nameFileCover, 6);
+        return redirect()->route('arsip.create', $idImage);
     }
 
     public function closeForm()

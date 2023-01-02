@@ -3,6 +3,9 @@
 namespace App\Http\Livewire\Arsip;
 
 use Alimranahmed\LaraOCR\Services\Tesseract;
+use App\Models\Arsip;
+use Exception;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 use Livewire\Component;
 use thiagoalessio\TesseractOCR\TesseractOCR;
@@ -14,13 +17,15 @@ class CreateArsip extends Component
 {
     use WithFileUploads;
 
-    public $fileCover, $textOCR;
+    public $fileArsip, $fileCover;
     public $pihakPertama = "", $pihakKedua = "", $judulAkta = "", $noAkta = "", $tanggalAkta = "", $jenis = "";
+    private $textOCR;
 
-    public function mount()
+    public function mount($idImage)
     {
-        if (Session::has('text')) {
-            $text = Session::get('text');
+        $this->textOCR = new TesseractOCR(public_path('storage/cover/' . $idImage));
+        $text = $this->textOCR->run();
+        if ($text !== null || $text !== '') {
 
             $baris = explode("\n", $text);
 
@@ -37,6 +42,8 @@ class CreateArsip extends Component
             $this->noAkta = $row4[1];
             $this->tanggalAkta = $row5[1];
             $this->jenis = $row6[1];
+
+            $this->fileCover = 'cover/' . $idImage;
         }
     }
 
@@ -49,41 +56,52 @@ class CreateArsip extends Component
     {
         $this->validate(
             [
-                'fileCover' => 'required|file|mimes:png,jpg',
+                'fileArsip' => 'required|file|mimes:pdf',
             ],
             [],
             [
-                'fileCover' => 'File Cover',
+                'fileArsip' => 'File Arsip',
             ]
         );
 
-        // $this->pihakPertama = "AWAL SIKING";
-        // return false;
+        $this->fileArsip = $this->fileArsip->store('files', 'public');
 
-        $nameFileCover = $this->fileCover->store('files', 'public');
-        $this->textOCR = new TesseractOCR(public_path('storage/' . $nameFileCover));
-        $text = $this->textOCR->run();
-        return redirect()->back()->with('text', $text);
-        $this->pihakPertama = $text;
-        if ($text !== null || $text !== "") {
-            $text = (array) $text;
-            $baris = explode("\n", $text[0]);
+        try {
+            // Transaction
+            $exception = DB::transaction(function () {
+                // Do your SQL here
+                $user = Arsip::create([
+                    'nama_1' => $this->pihakPertama,
+                    'nama_2' => $this->pihakKedua,
+                    'judul_akta' => $this->judulAkta,
+                    'no_akta' => $this->noAkta,
+                    'tanggal_akta' => $this->tanggalAkta,
+                    'jenis' => $this->jenis,
+                    'file_cover' => 'cover/' . $this->fileCover,
+                    'file_isi' => $this->fileArsip,
+                ]);
+            });
+
+            if (is_null($exception)) {
+
+                $this->dispatchBrowserEvent('swal:success-redirect', [
+                    'type' => 'success',
+                    'message' => 'Data Berhasil Ditambahkan!',
+                    'text' => 'ini telah disimpan di tabel Arsip.',
+                    'url' => route('arsip'),
+                ]);
 
 
-
-            $row1 = explode(": ", $baris[8]);
-            $row2 = explode(": ", $baris[9]);
-            $row3 = explode(": ", $baris[10]);
-            $row4 = explode(": ", $baris[11]);
-            $row5 = explode(": ", $baris[12]);
-            $row6 = explode(": ", $baris[13]);
-
-            $this->pihakPertama = $row1[1];
-            // $this->pihakKedua = $row2[1];
-            // $this->judulAkta = $row3[1];
-            // $this->noAkta = $row4[1];
-            // $this->tanggalAkta = $row5[1];
-            // $this->jenis = $row6[1];
+                // return redirect()->route('arsip')->with('message', 'ok');
+            } else {
+                throw new Exception();
+            }
+        } catch (Exception $e) {
+            $this->dispatchBrowserEvent('swal:error', [
+                'type' => 'error',
+                'message' => 'Terjadi Kesalahan!',
+                'text' => 'silahkan periksa kembali inputan atau hubungi developer.'
+            ]);
         }
     }
 }
