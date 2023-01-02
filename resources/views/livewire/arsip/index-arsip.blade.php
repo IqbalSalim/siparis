@@ -1,5 +1,6 @@
-<div x-cloak x-data="{ editModal: false, modalUploadImage:false }" x-on:close-edit-modal="editModal=false"
-    x-on:close-modal-upload="modalUploadImage=false">
+<div x-cloak x-data="{ editModal: false, modalUploadImage:false, modalShowFile:false }"
+    x-on:close-edit-modal="editModal=false" x-on:close-modal-upload="modalUploadImage=false"
+    x-on:close-show-modal="modalShowFile=false">
     <x-slot name="header">
         <h2 class="text-xl font-semibold leading-tight text-primary-500 dark:text-white">
             {{ __('Arsip') }}
@@ -12,6 +13,7 @@
     </x-slot>
 
     <livewire:arsip.modal-upload-image />
+    <livewire:arsip.modal-show-file />
 
 
 
@@ -58,11 +60,10 @@
                 </div>
             </div>
 
-            {{-- @if ($users->isNotEmpty()) --}}
+            @if ($arsips->isNotEmpty())
             <table class="w-full text-sm text-left text-gray-500">
                 <thead class="text-xs text-white uppercase bg-secondary-500">
                     <tr>
-
                         <th scope="col" class="px-6 py-3">
                             No
                         </th>
@@ -85,34 +86,44 @@
                             Jenis
                         </th>
                         <th scope="col" class="px-6 py-3">
-                            File Akta
-                        </th>
-                        <th scope="col" class="px-6 py-3">
                             <span class="sr-only">Edit</span>
                         </th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($arsips as $row)
+                    @foreach ($arsips as $key => $row)
                     <tr
                         class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                         <td class="px-6 py-4 font-bold uppercase text-secondary-500">
-                            {{ $row->name }}
-                        </td>
-                        <td class="px-6 py-4">
-                            {{ $row->email }}
+                            {{ $key + 1 }}
                         </td>
                         <td class="px-6 py-4 font-bold uppercase text-secondary-500">
-
+                            {{ $row->nama_1 }}
+                        </td>
+                        <td class="px-6 py-4">
+                            {{ $row->nama_2 }}
+                        </td>
+                        <td class="px-6 py-4">
+                            {{ $row->judul_akta }}
+                        </td>
+                        <td class="px-6 py-4">
+                            {{ $row->no_akta }}
+                        </td>
+                        <td class="px-6 py-4">
+                            {{ $row->tanggal_akta }}
+                        </td>
+                        <td class="px-6 py-4 font-bold uppercase text-secondary-500">
+                            {{ $row->jenis }}
                         </td>
                         <td class="px-6 py-4 text-right">
-                            <button @click="editModal=true" wire:click.prevent="$emit('getUser', {{ $row->id }})"
-                                class="px-3 btn-primary">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24"
-                                    stroke="currentColor" stroke-width="2">
+                            <button @click="modalShowFile=true"
+                                wire:click.prevent="$emit('getFileArsip', {{ $row->id }})" class="px-3 btn-primary">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                    stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
                                     <path stroke-linecap="round" stroke-linejoin="round"
-                                        d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
+                                        d="M15.75 17.25v3.375c0 .621-.504 1.125-1.125 1.125h-9.75a1.125 1.125 0 01-1.125-1.125V7.875c0-.621.504-1.125 1.125-1.125H6.75a9.06 9.06 0 011.5.124m7.5 10.376h3.375c.621 0 1.125-.504 1.125-1.125V11.25c0-4.46-3.243-8.161-7.5-8.876a9.06 9.06 0 00-1.5-.124H9.375c-.621 0-1.125.504-1.125 1.125v3.5m7.5 10.375H9.375a1.125 1.125 0 01-1.125-1.125v-9.25m12 6.625v-1.875a3.375 3.375 0 00-3.375-3.375h-1.5a1.125 1.125 0 01-1.125-1.125v-1.5a3.375 3.375 0 00-3.375-3.375H9.75" />
                                 </svg>
+
                             </button>
                             <button class="px-3 btn-primary" @click="$dispatch('swal:confirm', {{ $row->id }})">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24"
@@ -127,12 +138,14 @@
 
                 </tbody>
             </table>
-            {{-- {{ $users->links() }} --}}
-            {{-- @else --}}
+            <div class="px-6 py-2">
+                {{ $arsips->links() }}
+            </div>
+            @else
             <p class="px-4 py-2 mt-2 text-2xl font-bold text-center text-red-500 animate-pulse">
                 Data tidak ditemukan!
             </p>
-            {{-- @endif --}}
+            @endif
         </div>
         {{-- End Tabel User --}}
     </div>

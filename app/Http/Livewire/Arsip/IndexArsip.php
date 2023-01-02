@@ -17,7 +17,6 @@ class IndexArsip extends Component
 
     public function render()
     {
-
         return view('livewire.arsip.index-arsip', [
             'arsips' => ($this->search == null || $this->search == '') ?
                 Arsip::latest()->paginate($this->paginate) :
@@ -31,7 +30,7 @@ class IndexArsip extends Component
             // Transaction
             $exception = DB::transaction(function () use ($id) {
                 // Do your SQL here
-                // User::find($id)->delete();
+                Arsip::find($id)->delete();
             });
 
             if (is_null($exception)) {
