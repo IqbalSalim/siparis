@@ -3,6 +3,7 @@
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Livewire\Arsip\CreateArsip;
 use App\Http\Livewire\Arsip\IndexArsip;
+use App\Http\Livewire\SuratMasuk\IndexSuratMasuk;
 use App\Http\Livewire\User\IndexUser;
 use Illuminate\Support\Facades\Route;
 
@@ -32,6 +33,10 @@ Route::group(['prefix' => '', 'middleware' => 'auth'], function () {
     Route::group(['prefix' => '/arsip', 'as' => 'arsip'], function () {
         Route::get('/', IndexArsip::class)->middleware(['can:olah arsip'])->name('');
         Route::get('/create/{idImage}', CreateArsip::class)->middleware(['can:olah arsip'])->name('.create');
+    });
+
+    Route::group(['prefix' => '/suratmasuk', 'as' => 'suratmasuk'], function () {
+        Route::get('/', IndexSuratMasuk::class)->middleware(['can:olah surat masuk'])->name('');
     });
 });
 

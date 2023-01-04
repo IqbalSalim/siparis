@@ -14,8 +14,8 @@
 
 
     <div id="content">
-        <div class="text-right py-2">
-            <a href="{{ route('arsip') }}" class="inline-flex btn-secondary space-x-1">
+        <div class="py-2 text-right">
+            <a href="{{ route('arsip') }}" class="inline-flex space-x-1 btn-secondary">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                     stroke="currentColor" class="w-4 h-4">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M9 15L3 9m0 0l6-6M3 9h12a6 6 0 010 12h-3" />
@@ -25,7 +25,7 @@
         </div>
         <div class="flex flex-row space-x-8">
             <div class="w-1/2 p-4 bg-white rounded-lg shadow-lg">
-                <h3 class=" text-xl font-bold text-primary-500 ">Cover File</h3>
+                <h3 class="text-xl font-bold text-primary-500">Cover File</h3>
                 <p class="mb-4 text-secondary-500">Periksa Kembali Inputan Cover File</p>
                 <table class="w-full pt-4">
                     <tr
@@ -58,7 +58,13 @@
                     <tr
                         class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                         <th>Jenis</th>
-                        <td><input type="text" class="my-1" name="jenis" wire:model.defer='jenis'></td>
+                        <td>
+                            <select name="jenis" wire:model.defer='jenis'>
+                                <option value="NOTARIS">NOTARIS</option>
+                                <option value="PPAT">PPAT</option>
+                            </select>
+                        </td>
+                        {{-- <td><input type="text" class="my-1" name="jenis" wire:model.defer='jenis'></td> --}}
                     </tr>
                 </table>
             </div>

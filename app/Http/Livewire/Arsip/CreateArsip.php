@@ -41,7 +41,8 @@ class CreateArsip extends Component
             $this->judulAkta = $row3[1];
             $this->noAkta = $row4[1];
             $this->tanggalAkta = $row5[1];
-            $this->jenis = $row6[1];
+            // $this->jenis = $row6[1];
+            $this->jenis = 'PPAT';
 
             $this->fileCover = 'cover/' . $idImage;
         }
@@ -57,6 +58,7 @@ class CreateArsip extends Component
         $this->validate(
             [
                 'fileArsip' => 'required|file|mimes:pdf',
+                'jenis' => 'required|string|in:NOTARIS,PPAT'
             ],
             [],
             [
