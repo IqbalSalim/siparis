@@ -3,6 +3,7 @@
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Livewire\Arsip\CreateArsip;
 use App\Http\Livewire\Arsip\IndexArsip;
+use App\Http\Livewire\SuratKeluar\IndexSuratKeluar;
 use App\Http\Livewire\SuratMasuk\IndexSuratMasuk;
 use App\Http\Livewire\User\IndexUser;
 use Illuminate\Support\Facades\Route;
@@ -38,6 +39,8 @@ Route::group(['prefix' => '', 'middleware' => 'auth'], function () {
     Route::group(['prefix' => '/suratmasuk', 'as' => 'suratmasuk'], function () {
         Route::get('/', IndexSuratMasuk::class)->middleware(['can:olah surat masuk'])->name('');
     });
+
+    Route::get('/suratkeluar', IndexSuratKeluar::class)->middleware(['can:olah surat keluar'])->name('suratkeluar');
 });
 
 require __DIR__ . '/auth.php';

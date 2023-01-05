@@ -31,6 +31,11 @@
                         {{ __('Surat Masuk') }}
                     </x-nav-link>
                     @endcan
+                    @can('olah surat keluar')
+                    <x-nav-link :href="route('suratkeluar')" :active="request()->routeIs('suratkeluar')">
+                        {{ __('Surat Keluar') }}
+                    </x-nav-link>
+                    @endcan
                 </div>
             </div>
 

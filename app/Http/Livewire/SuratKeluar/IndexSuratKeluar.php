@@ -1,15 +1,15 @@
 <?php
 
-namespace App\Http\Livewire\SuratMasuk;
+namespace App\Http\Livewire\SuratKeluar;
 
-use App\Models\SuratMasuk;
+use App\Models\SuratKeluar;
 use Exception;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Livewire\Component;
 use Livewire\WithPagination;
 
-class IndexSuratMasuk extends Component
+class IndexSuratKeluar extends Component
 {
     use WithPagination;
 
@@ -20,10 +20,10 @@ class IndexSuratMasuk extends Component
 
     public function render()
     {
-        return view('livewire.surat-masuk.index-surat-masuk', [
-            'suratmasuk' => ($this->search == null || $this->search == '') ?
-                SuratMasuk::latest()->paginate($this->paginate) :
-                SuratMasuk::where('perihal', 'like', '%' . $this->search . '%')->paginate($this->paginate)
+        return view('livewire.surat-keluar.index-surat-keluar', [
+            'suratkeluar' => ($this->search == null || $this->search == '') ?
+                SuratKeluar::latest()->paginate($this->paginate) :
+                SuratKeluar::where('perihal', 'like', '%' . $this->search . '%')->paginate($this->paginate)
         ]);
     }
 
@@ -33,7 +33,7 @@ class IndexSuratMasuk extends Component
             // Transaction
             $exception = DB::transaction(function () use ($id) {
                 // Do your SQL here
-                $result = SuratMasuk::find($id);
+                $result = SuratKeluar::find($id);
                 $this->file = $result->file;
                 $result->delete();
             });
