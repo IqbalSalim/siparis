@@ -8,19 +8,20 @@ use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 use Livewire\WithPagination;
 
-class IndexArsip extends Component
+class Ppat extends Component
 {
     use WithPagination;
 
     public $paginate = 10, $search = null;
     protected $listeners = ['render', 'delete'];
 
+
     public function render()
     {
-        return view('livewire.arsip.index-arsip', [
+        return view('livewire.arsip.ppat', [
             'arsips' => ($this->search == null || $this->search == '') ?
-                Arsip::latest()->paginate($this->paginate) :
-                Arsip::where('nama_1', 'like', '%' . $this->search . '%')->paginate($this->paginate)
+                Arsip::where('jenis', 'like', 'PPAT')->latest()->paginate($this->paginate) :
+                Arsip::where('nama_1', 'like', '%' . $this->search . '%')->where('jenis', 'like', 'PPAT')->paginate($this->paginate)
         ]);
     }
 

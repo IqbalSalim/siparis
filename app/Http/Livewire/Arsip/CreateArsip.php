@@ -20,6 +20,7 @@ class CreateArsip extends Component
     public $fileArsip, $fileCover;
     public $pihakPertama = "", $pihakKedua = "", $judulAkta = "", $noAkta = "", $tanggalAkta = "", $jenis = "";
     private $textOCR;
+    public $url;
 
     public function mount($idImage)
     {
@@ -41,8 +42,12 @@ class CreateArsip extends Component
             $this->judulAkta = $row3[1];
             $this->noAkta = $row4[1];
             $this->tanggalAkta = $row5[1];
-            // $this->jenis = $row6[1];
-            $this->jenis = 'PPAT';
+            $this->jenis = $row6[1];
+            if ($this->jenis == 'ppat' || $this->jenis == 'Ppat' || $this->jenis == 'PPAT') {
+                $this->jenis = 'PPAT';
+            } else {
+                $this->jenis = 'NOTARIS';
+            }
 
             $this->fileCover = 'cover/' . $idImage;
         }
@@ -85,16 +90,16 @@ class CreateArsip extends Component
             });
 
             if (is_null($exception)) {
-
+                $this->url = route('notaris');
+                if ($this->jenis == 'PPAT') {
+                    $this->url = route('ppat');
+                }
                 $this->dispatchBrowserEvent('swal:success-redirect', [
                     'type' => 'success',
                     'message' => 'Data Berhasil Ditambahkan!',
                     'text' => 'ini telah disimpan di tabel Arsip.',
-                    'url' => route('arsip'),
+                    'url' => $this->url,
                 ]);
-
-
-                // return redirect()->route('arsip')->with('message', 'ok');
             } else {
                 throw new Exception();
             }

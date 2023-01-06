@@ -22,8 +22,15 @@
                     </x-nav-link>
                     @endcan
                     @can('olah arsip')
-                    <x-nav-link :href="route('arsip')" :active="request()->routeIs('arsip')">
-                        {{ __('Arsip') }}
+                    @endcan
+                    @can('olah arsip')
+                    <x-nav-link :href="route('notaris')" :active="request()->routeIs('notaris')">
+                        {{ __('Notaris') }}
+                    </x-nav-link>
+                    @endcan
+                    @can('olah arsip')
+                    <x-nav-link :href="route('ppat')" :active="request()->routeIs('ppat')">
+                        {{ __('PPAT') }}
                     </x-nav-link>
                     @endcan
                     @can('olah surat masuk')

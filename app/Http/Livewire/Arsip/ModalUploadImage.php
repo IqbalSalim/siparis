@@ -32,7 +32,7 @@ class ModalUploadImage extends Component
 
         $nameFileCover = $this->fileCover->store('cover', 'public');
         $idImage = substr($nameFileCover, 6);
-        return redirect()->route('arsip.create', $idImage);
+        return redirect()->route('create-arsip', $idImage);
     }
 
     public function closeForm()

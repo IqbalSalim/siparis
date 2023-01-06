@@ -3,12 +3,12 @@
     x-on:close-show-modal="modalShowFile=false">
     <x-slot name="header">
         <h2 class="text-xl font-semibold leading-tight text-primary-500 dark:text-white">
-            {{ __('Arsip') }}
+            {{ __('PPAT') }}
         </h2>
         <div class="flex flex-row space-x-1 text-sm text-primary-200">
             <div class="hover:text-primary"><a href="/dashboard">Dashboard</a></div>
             <div>-</div>
-            <div>Arsip</div>
+            <div>PPAT</div>
         </div>
     </x-slot>
 
@@ -23,7 +23,8 @@
             <div class="p-4 bg-white dark:bg-gray-800">
                 <div class="flex flex-row items-center justify-between">
                     <div>
-                        <h2 class="mb-2 text-xl font-semibold text-primary-500 dark:text-white">Daftar Arsip</h2>
+                        <h2 class="mb-2 text-xl font-semibold text-primary-500 dark:text-white">Daftar Arsip PPAT
+                        </h2>
                     </div>
                     <button @click="modalUploadImage=true" class="btn-primary btn-icon">
                         <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 mr-1 -ml-1" fill="none"

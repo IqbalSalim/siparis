@@ -2,7 +2,8 @@
 
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Livewire\Arsip\CreateArsip;
-use App\Http\Livewire\Arsip\IndexArsip;
+use App\Http\Livewire\Arsip\Notaris;
+use App\Http\Livewire\Arsip\Ppat;
 use App\Http\Livewire\SuratKeluar\IndexSuratKeluar;
 use App\Http\Livewire\SuratMasuk\IndexSuratMasuk;
 use App\Http\Livewire\User\IndexUser;
@@ -29,12 +30,10 @@ Route::get('/dashboard', function () {
 
 Route::group(['prefix' => '', 'middleware' => 'auth'], function () {
     Route::get('user', IndexUser::class)->middleware(['can:olah user'])->name('user');
-    // Route::get('arsip', IndexArsip::class)->middleware(['can:olah arsip'])->name('arsip');
 
-    Route::group(['prefix' => '/arsip', 'as' => 'arsip'], function () {
-        Route::get('/', IndexArsip::class)->middleware(['can:olah arsip'])->name('');
-        Route::get('/create/{idImage}', CreateArsip::class)->middleware(['can:olah arsip'])->name('.create');
-    });
+    Route::get('/create-arsip/{idImage}', CreateArsip::class)->middleware(['can:olah arsip'])->name('create-arsip');
+    Route::get('/notaris', Notaris::class)->middleware(['can:olah arsip'])->name('notaris');
+    Route::get('/ppat', Ppat::class)->middleware(['can:olah arsip'])->name('ppat');
 
     Route::group(['prefix' => '/suratmasuk', 'as' => 'suratmasuk'], function () {
         Route::get('/', IndexSuratMasuk::class)->middleware(['can:olah surat masuk'])->name('');
