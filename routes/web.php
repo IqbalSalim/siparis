@@ -4,9 +4,12 @@ use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Livewire\Arsip\CreateArsip;
 use App\Http\Livewire\Arsip\Notaris;
 use App\Http\Livewire\Arsip\Ppat;
+use App\Http\Livewire\Profil;
 use App\Http\Livewire\SuratKeluar\IndexSuratKeluar;
 use App\Http\Livewire\SuratMasuk\IndexSuratMasuk;
+use App\Http\Livewire\UbahPassword;
 use App\Http\Livewire\User\IndexUser;
+use GuzzleHttp\Middleware;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -40,6 +43,8 @@ Route::group(['prefix' => '', 'middleware' => 'auth'], function () {
     });
 
     Route::get('/suratkeluar', IndexSuratKeluar::class)->middleware(['can:olah surat keluar'])->name('suratkeluar');
+    Route::get('/profil', Profil::class)->name('profil');
+    Route::get('/password', UbahPassword::class)->middleware(['can:ubah password'])->name('password');
 });
 
 require __DIR__ . '/auth.php';
