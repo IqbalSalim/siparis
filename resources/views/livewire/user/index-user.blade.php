@@ -66,7 +66,10 @@
                             Nama
                         </th>
                         <th scope="col" class="px-6 py-3">
-                            Email
+                            No Telepon
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            Alamat
                         </th>
                         <th scope="col" class="px-6 py-3">
                             Role
@@ -80,11 +83,24 @@
                     @foreach ($users as $row)
                     <tr
                         class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                        <td class="px-6 py-4 font-bold uppercase text-secondary-500">
-                            {{ $row->name }}
+                        <td class="px-6 py-4 ">
+                            <div class="flex gap-x-2 items-center">
+                                <div class="w-14 h-14 ">
+                                    <img class="object-cover rounded-lg"
+                                        src="{{ $row->foto !== '' ? asset('storage/'.$row->foto) : asset('assets/images/default-user.png') }}"
+                                        alt="Foto User">
+                                </div>
+                                <div class="flex gap-y-0 flex-col">
+                                    <span class="font-bold uppercase text-secondary-500">{{ $row->name }}</span>
+                                    <span class="font-bold">{{ $row->email }}</span>
+                                </div>
+                            </div>
                         </td>
                         <td class="px-6 py-4">
-                            {{ $row->email }}
+                            {{ $row->no_telpon }}
+                        </td>
+                        <td class="px-6 py-4">
+                            {{ $row->alamat }}
                         </td>
                         <td class="px-6 py-4 font-bold uppercase text-secondary-500">
                             {{ $row->getRoleNames()[0] }}

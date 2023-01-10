@@ -20,10 +20,43 @@
                         <div class="flex flex-col space-y-4">
                             <div>
                                 <label for="nama">Nama</label>
-                                <input type="text" wire:model.defer='name' class="mt-1">
+                                <input type="text" wire:model.defer='name' id="nama" class="mt-1">
                                 <span class="text-xs text-red-700">
-                                    @error('nama')
+                                    @error('name')
+                                    {{ $message }}
+                                    @enderror
+                                </span>
+                            </div>
+                            <div class="flex gap-x-4">
+                                <div class="flex-1">
+                                    <label for="jenis_kelamin">Jenis Kelamin</label>
+                                    <select wire:model.defer='jenis_kelamin' id="jenis_kelamin" class="mt-1">
+                                        <option value="">-- Pilih Jenis Kelamin --</option>
+                                        <option value="Laki-laki">Laki-laki</option>
+                                        <option value="Perempuan">Perempuan</option>
+                                    </select>
+                                    <span class="text-xs text-red-700">
+                                        @error('jenis_kelamin')
                                         {{ $message }}
+                                        @enderror
+                                    </span>
+                                </div>
+                                <div class="flex-1">
+                                    <label for="no_telpon">No Telepon</label>
+                                    <input type="text" wire:model.defer='no_telpon' id="no_telpon" class="mt-1">
+                                    <span class="text-xs text-red-700">
+                                        @error('no_telpon')
+                                        {{ $message }}
+                                        @enderror
+                                    </span>
+                                </div>
+                            </div>
+                            <div>
+                                <label for="alamat">Alamat</label>
+                                <input type="text" wire:model.defer='alamat' id="alamat" class="mt-1">
+                                <span class="text-xs text-red-700">
+                                    @error('alamat')
+                                    {{ $message }}
                                     @enderror
                                 </span>
                             </div>
@@ -32,9 +65,27 @@
                                 <input type="email" wire:model='email' name="email" id="email" class="mt-1">
                                 <span class="text-xs text-red-700">
                                     @error('email')
-                                        {{ $message }}
+                                    {{ $message }}
                                     @enderror
                                 </span>
+                            </div>
+
+                            <div>
+                                <label for="foto">Foto</label>
+                                <div class="flex flex-row items-start mt-1 space-x-2">
+                                    <div class="">
+                                        <img src="{{ $foto ? $foto->temporaryUrl() : asset('storage/'.$foto_preview) }}"
+                                            alt="" class="object-cover w-16 h-16 rounded-lg">
+                                    </div>
+                                    <div>
+                                        <input type="file" wire:model.defer='foto' name="foto">
+                                        <span class="block text-xs text-red-700">
+                                            @error('foto')
+                                            {{ $message }}
+                                            @enderror
+                                        </span>
+                                    </div>
+                                </div>
                             </div>
 
                         </div>

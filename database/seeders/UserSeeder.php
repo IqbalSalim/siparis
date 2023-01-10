@@ -20,13 +20,21 @@ class UserSeeder extends Seeder
         $users = [
             [
                 'name' => 'Dayat Ente',
+                'jenis_kelamin' => 'Laki-laki',
+                'no_telpon' => '082345345332',
+                'alamat' => 'Jln Dewi Sartika, Samping Kampus 1 UNG',
                 'email' => 'admin@gmail.com',
+                'foto' => 'foto/default-user.png',
                 'password' => 'password',
                 'role' => 'admin',
             ],
             [
                 'name' => 'Iqbal Salim',
+                'jenis_kelamin' => 'Laki-laki',
+                'no_telpon' => '082271131552',
+                'alamat' => 'Jln Analisa, Kel. Tumbihe, Kec. Kabila, Kab. Bone Bolango',
                 'email' => 'iqbalbinsalim@gmail.com',
+                'foto' => 'foto/default-user.png',
                 'password' => 'password',
                 'role' => 'operator',
             ]
@@ -35,7 +43,11 @@ class UserSeeder extends Seeder
         foreach ($users as $row) {
             User::create([
                 'name' => $row['name'],
+                'jenis_kelamin' => $row['jenis_kelamin'],
+                'no_telpon' => $row['no_telpon'],
+                'alamat' => $row['alamat'],
                 'email' => $row['email'],
+                'foto' => $row['foto'],
                 'password' => Hash::make($row['password']),
             ]);
 

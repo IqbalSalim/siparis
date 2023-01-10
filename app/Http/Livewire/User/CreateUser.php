@@ -6,12 +6,16 @@ use App\Models\User;
 use Exception;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 use Livewire\Component;
+use Livewire\WithFileUploads;
 use Spatie\Permission\Models\Role;
 
 class CreateUser extends Component
 {
-    public $name, $email;
+    use WithFileUploads;
+
+    public $name, $jenis_kelamin, $no_telpon, $alamat,  $email, $foto;
 
 
     public function render()
@@ -21,7 +25,7 @@ class CreateUser extends Component
 
     public function closeForm()
     {
-        $this->reset('name', 'email');
+        $this->reset('name', 'jenis_kelamin', 'no_telpon', 'alamat', 'email', 'foto');
         $this->resetValidation();
         $this->dispatchBrowserEvent('close-create-modal');
     }
@@ -31,22 +35,40 @@ class CreateUser extends Component
         $this->validate(
             [
                 'name' => 'required|string|max:255',
+                'jenis_kelamin' => 'required|string|in:Laki-laki,Perempuan',
+                'no_telpon' => 'required|numeric|digits_between:11,13',
+                'alamat' => 'required|string|max:255',
                 'email' => 'required|email|unique:users,email',
+                'foto' => 'image|max:2048',
             ],
             [],
             [
                 'name' => 'Nama',
+                'jenis_kelamin' => 'Jenis Kelamin',
+                'no_telpon' => 'No Telepon',
+                'alamat' => 'Alamat',
                 'email' => 'Email',
+                'foto' => 'Foto',
             ]
         );
 
+        if ($this->foto !== null) {
+            $foto = $this->foto->store('foto', 'public');
+        } else {
+            $foto = '';
+        }
+
         try {
             // Transaction
-            $exception = DB::transaction(function () {
+            $exception = DB::transaction(function () use ($foto) {
                 // Do your SQL here
                 $user = User::create([
                     'name' => $this->name,
+                    'jenis_kelamin' => $this->jenis_kelamin,
+                    'no_telpon' => $this->no_telpon,
+                    'alamat' => $this->alamat,
                     'email' => $this->email,
+                    'foto' => $foto,
                     'password' => Hash::make('password')
                 ]);
 
@@ -66,6 +88,9 @@ class CreateUser extends Component
                 throw new Exception();
             }
         } catch (Exception $e) {
+            if (Storage::disk('public')->exists($foto)) {
+                Storage::disk('public')->delete($foto);
+            }
             $this->dispatchBrowserEvent('swal:error', [
                 'type' => 'error',
                 'message' => 'Terjadi Kesalahan!',
