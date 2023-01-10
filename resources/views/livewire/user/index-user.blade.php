@@ -84,13 +84,13 @@
                     <tr
                         class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                         <td class="px-6 py-4 ">
-                            <div class="flex gap-x-2 items-center">
+                            <div class="flex items-center gap-x-2">
                                 <div class="w-14 h-14 ">
                                     <img class="object-cover rounded-lg"
                                         src="{{ $row->foto !== '' ? asset('storage/'.$row->foto) : asset('assets/images/default-user.png') }}"
                                         alt="Foto User">
                                 </div>
-                                <div class="flex gap-y-0 flex-col">
+                                <div class="flex flex-col gap-y-0">
                                     <span class="font-bold uppercase text-secondary-500">{{ $row->name }}</span>
                                     <span class="font-bold">{{ $row->email }}</span>
                                 </div>
