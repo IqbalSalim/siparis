@@ -1,18 +1,15 @@
-<div x-cloak x-data="{ createModal: false, editModal: false }" x-on:close-create-modal="createModal=false"
-    x-on:close-edit-modal="editModal=false">
+<div>
     <x-slot name="header">
         <h2 class="text-xl font-semibold leading-tight text-primary-500 dark:text-white">
-            {{ __('User') }}
+            {{ __('Profil') }}
         </h2>
         <div class="flex flex-row space-x-1 text-sm text-primary-200">
             <div class="hover:text-primary"><a href="/dashboard">Dashboard</a></div>
             <div>-</div>
-            <div>User</div>
+            <div>Profil</div>
         </div>
     </x-slot>
 
-    <livewire:user.create-user></livewire:user.create-user>
-    <livewire:user.edit-user></livewire:user.edit-user>
 
     <div id="content">
         <div class="px-6 py-4 bg-white rounded-lg dark:bg-gray-800">
