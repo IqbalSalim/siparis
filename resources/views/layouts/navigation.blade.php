@@ -43,6 +43,32 @@
                         {{ __('Surat Keluar') }}
                     </x-nav-link>
                     @endcan
+                    @can('lihat laporan')
+                    <x-dropdown align="left" width="48" :active="request()->routeIs('laporan.*')">
+                        <x-slot name="trigger">
+                            <x-nav-link class="border-none cursor-pointer">
+                                {{ __('Laporan') }}
+                            </x-nav-link>
+                        </x-slot>
+                        <x-slot name='content'>
+                            <x-dropdown-link :href="route('laporan.notaris')"
+                                :active="request()->routeIs('laporan.notaris')">
+                                {{ __('Notaris') }}
+                            </x-dropdown-link>
+                            <x-dropdown-link :href="route('laporan.ppat')" :active="request()->routeIs('laporan.ppat')">
+                                {{ __('PPAT') }}
+                            </x-dropdown-link>
+                            <x-dropdown-link :href="route('laporan.suratmasuk')"
+                                :active="request()->routeIs('laporan.suratmasuk')">
+                                {{ __('Surat Masuk') }}
+                            </x-dropdown-link>
+                            <x-dropdown-link :href="route('laporan.suratkeluar')"
+                                :active="request()->routeIs('laporan.suratkeluar')">
+                                {{ __('Surat Keluar') }}
+                            </x-dropdown-link>
+                        </x-slot>
+                    </x-dropdown>
+                    @endcan
                 </div>
             </div>
 

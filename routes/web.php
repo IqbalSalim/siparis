@@ -1,9 +1,17 @@
 <?php
 
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
+use App\Http\Controllers\CetakLaporanNotaris;
+use App\Http\Controllers\CetakLaporanPpat;
+use App\Http\Controllers\CetakLaporanSuratKeluar;
+use App\Http\Controllers\CetakLaporanSuratMasuk;
 use App\Http\Livewire\Arsip\CreateArsip;
 use App\Http\Livewire\Arsip\Notaris;
 use App\Http\Livewire\Arsip\Ppat;
+use App\Http\Livewire\Laporan\LaporanNotaris;
+use App\Http\Livewire\Laporan\LaporanPpat;
+use App\Http\Livewire\Laporan\LaporanSuratKeluar;
+use App\Http\Livewire\Laporan\LaporanSuratMasuk;
 use App\Http\Livewire\Profil;
 use App\Http\Livewire\SuratKeluar\IndexSuratKeluar;
 use App\Http\Livewire\SuratMasuk\IndexSuratMasuk;
@@ -45,6 +53,18 @@ Route::group(['prefix' => '', 'middleware' => 'auth'], function () {
     Route::get('/suratkeluar', IndexSuratKeluar::class)->middleware(['can:olah surat keluar'])->name('suratkeluar');
     Route::get('/profil', Profil::class)->name('profil');
     Route::get('/password', UbahPassword::class)->middleware(['can:ubah password'])->name('password');
+
+    Route::group(['prefix' => '/laporan', 'as' => 'laporan'], function () {
+        Route::get('/notaris', LaporanNotaris::class)->middleware(['can:lihat laporan'])->name('.notaris');
+        Route::get('/ppat', LaporanPpat::class)->middleware(['can:lihat laporan'])->name('.ppat');
+        Route::get('/suratmasuk', LaporanSuratMasuk::class)->middleware(['can:lihat laporan'])->name('.suratmasuk');
+        Route::get('/suratkeluar', LaporanSuratKeluar::class)->middleware(['can:lihat laporan'])->name('.suratkeluar');
+    });
+
+    Route::get('/laporan-notaris/{bulan_awal}/{bulan_akhir}/{tahun}', [CetakLaporanNotaris::class, 'index'])->middleware(['can:cetak laporan'])->name('cetak-notaris');
+    Route::get('/laporan-ppat/{bulan_awal}/{bulan_akhir}/{tahun}', [CetakLaporanPpat::class, 'index'])->middleware(['can:cetak laporan'])->name('cetak-ppat');
+    Route::get('/laporan-surat-masuk/{bulan_awal}/{bulan_akhir}/{tahun}', [CetakLaporanSuratMasuk::class, 'index'])->middleware(['can:cetak laporan'])->name('cetak-surat-masuk');
+    Route::get('/laporan-surat-keluar/{bulan_awal}/{bulan_akhir}/{tahun}', [CetakLaporanSuratKeluar::class, 'index'])->middleware(['can:cetak laporan'])->name('cetak-surat-keluar');
 });
 
 require __DIR__ . '/auth.php';

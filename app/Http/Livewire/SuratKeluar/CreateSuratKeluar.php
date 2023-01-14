@@ -30,7 +30,7 @@ class CreateSuratKeluar extends Component
     {
         $this->validate(
             [
-                'no_surat' => 'required|string|max:255|unique:surat_masuks,no_surat',
+                'no_surat' => 'required|string|max:255|unique:surat_keluars,no_surat',
                 'tanggal_surat' => 'required|date',
                 'tujuan_surat' => 'required|string|max:255',
                 'perihal' => 'required|string|max:255',
