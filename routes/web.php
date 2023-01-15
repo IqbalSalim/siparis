@@ -8,6 +8,7 @@ use App\Http\Controllers\CetakLaporanSuratMasuk;
 use App\Http\Livewire\Arsip\CreateArsip;
 use App\Http\Livewire\Arsip\Notaris;
 use App\Http\Livewire\Arsip\Ppat;
+use App\Http\Livewire\Dashboard\IndexDashboard;
 use App\Http\Livewire\Laporan\LaporanNotaris;
 use App\Http\Livewire\Laporan\LaporanPpat;
 use App\Http\Livewire\Laporan\LaporanSuratKeluar;
@@ -35,9 +36,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [AuthenticatedSessionController::class, 'create']);
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth'])->name('dashboard');
+Route::get('/dashboard', IndexDashboard::class)->middleware(['auth'])->name('dashboard');
 
 Route::group(['prefix' => '', 'middleware' => 'auth'], function () {
     Route::get('user', IndexUser::class)->middleware(['can:olah user'])->name('user');

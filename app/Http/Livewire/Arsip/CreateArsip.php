@@ -63,11 +63,22 @@ class CreateArsip extends Component
         $this->validate(
             [
                 'fileArsip' => 'required|file|mimes:pdf',
-                'jenis' => 'required|string|in:NOTARIS,PPAT'
+                'jenis' => 'required|string|in:NOTARIS,PPAT',
+                'tanggalAkta' => 'required|date',
+                'pihakPertama' => 'required|string|max:255',
+                'pihakKedua' => 'required|string|max:255',
+                'judulAkta' => 'required|string|max:255',
+                'noAkta' => 'required|string|max:255',
             ],
             [],
             [
                 'fileArsip' => 'File Arsip',
+                'jenis' => 'Jenis',
+                'tanggalAkta' => 'Tanggal Akta',
+                'pihakPertama' => 'Pihak Pertama',
+                'pihakKedua' => 'Pihak Kedua',
+                'judulAkta' => 'Judul Akta',
+                'noAkta' => 'No Akta',
             ]
         );
 

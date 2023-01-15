@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('nama_2');
             $table->string('judul_akta');
             $table->string('no_akta');
-            $table->string('tanggal_akta');
+            $table->date('tanggal_akta');
             $table->string('jenis');
             $table->string('file_cover');
             $table->string('file_isi');

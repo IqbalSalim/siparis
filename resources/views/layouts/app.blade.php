@@ -38,6 +38,8 @@
         </main>
     </div>
     @livewireScripts
+    <livewire:scripts />
+    @livewireChartsScripts
 
     <script>
         window.addEventListener('swal:success', event => {

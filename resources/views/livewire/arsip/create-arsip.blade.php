@@ -44,7 +44,14 @@
                     <tr
                         class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                         <th>Tanggal Akta</th>
-                        <td><input type="text" class="my-1" name="tanggalAkta" wire:model.defer='tanggalAkta'></td>
+                        <td>
+                            <input type="date" class="my-1" name="tanggalAkta" wire:model.defer='tanggalAkta'>
+                            <span class="text-xs text-red-700">
+                                @error('tanggalAkta')
+                                {{ $message }}
+                                @enderror
+                            </span>
+                        </td>
                     </tr>
                     <tr
                         class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
