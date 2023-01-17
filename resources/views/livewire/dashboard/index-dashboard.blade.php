@@ -11,13 +11,37 @@
 
 
     <div id="content">
-        {{-- Tabel User --}}
-        <div class="relative w-1/2 border shadow-md sm:rounded-lg dark:border-gray-700">
-            <div class="col-span-1 bg-white rounded-lg" style="height: 32rem;">
-                <livewire:livewire-column-chart :column-chart-model="$columnChartModel">
-                </livewire:livewire-column-chart>
+        <div class="grid grid-cols-2 gap-x-4">
+            <div class="relative p-4 bg-white border shadow-md sm:rounded-lg">
+                <div class="w-40">
+                    <label for="tahunNotaris" class="sr-only">Tahun</label>
+                    <select wire:model='tahunNotaris' wire:change='notarisTahunChange'
+                        class="text-sm accent-secondary-500">
+                        <option value="">-- Pilih Tahun --</option>
+                        <option value="2022">2022</option>
+                        <option value="2023">2023</option>
+                    </select>
+                </div>
+                <div class="col-span-1 bg-white rounded-lg" style="height: 28rem;">
+                    <livewire:livewire-column-chart :column-chart-model="$notaris" key="{{ $notaris->reactiveKey() }}">
+                    </livewire:livewire-column-chart>
+                </div>
+            </div>
+            <div class="relative p-4 bg-white border shadow-md sm:rounded-lg">
+                <div class="w-40">
+                    <label for="tahunNotaris" class="sr-only">Tahun</label>
+                    <select wire:model='tahunNotaris' wire:change='notarisTahunChange'
+                        class="text-sm accent-secondary-500">
+                        <option value="">-- Pilih Tahun --</option>
+                        <option value="2022">2022</option>
+                        <option value="2023">2023</option>
+                    </select>
+                </div>
+                <div class="col-span-1 bg-white rounded-lg" style="height: 28rem;">
+                    <livewire:livewire-column-chart :column-chart-model="$notaris" key="{{ $notaris->reactiveKey() }}">
+                    </livewire:livewire-column-chart>
+                </div>
             </div>
         </div>
-        {{-- End Tabel User --}}
     </div>
 </div>
