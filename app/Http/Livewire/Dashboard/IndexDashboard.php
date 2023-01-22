@@ -3,6 +3,8 @@
 namespace App\Http\Livewire\Dashboard;
 
 use App\Models\Arsip;
+use App\Models\SuratKeluar;
+use App\Models\SuratMasuk;
 use Asantibanez\LivewireCharts\Models\ColumnChartModel;
 use Carbon\Carbon;
 use Livewire\Component;
@@ -63,7 +65,19 @@ class IndexDashboard extends Component
             ->addColumn('Desember', $this->result[12], '#39f178')
             ->withoutLegend();
 
-        return view('livewire.dashboard.index-dashboard', ['notaris' => $notaris, 'ppat' => $ppat]);
+        $jumlahNotaris = Arsip::where('jenis', 'NOTARIS')->get()->count();
+        $jumlahPpat = Arsip::where('jenis', 'PPAT')->get()->count();
+        $jumlahSuratMasuk = SuratMasuk::all()->count();
+        $jumlahSuratKeluar = SuratKeluar::all()->count();
+
+        return view('livewire.dashboard.index-dashboard', [
+            'notaris' => $notaris,
+            'ppat' => $ppat,
+            'jumlahPpat' => $jumlahPpat,
+            'jumlahNotaris' => $jumlahNotaris,
+            'jumlahSuratMasuk' => $jumlahSuratMasuk,
+            'jumlahSuratKeluar' => $jumlahSuratKeluar,
+        ]);
     }
 
     public function notarisTahunChange()

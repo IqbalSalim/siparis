@@ -43,7 +43,7 @@
                         {{ __('Surat Keluar') }}
                     </x-nav-link>
                     @endcan
-                    @can('lihat laporan')
+
                     <x-dropdown align="left" width="48" :active="request()->routeIs('laporan.*')">
                         <x-slot name="trigger">
                             <x-nav-link class="border-none cursor-pointer">
@@ -68,7 +68,7 @@
                             </x-dropdown-link>
                         </x-slot>
                     </x-dropdown>
-                    @endcan
+
                 </div>
             </div>
 

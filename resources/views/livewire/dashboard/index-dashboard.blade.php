@@ -18,7 +18,7 @@
                 <div class="flex flex-col gap-y-4">
                     <div class="font-bold text-white">
                         <p class="text-sm">DOKUMEN NOTARIS</p>
-                        <p class="text-4xl">20</p>
+                        <p class="text-4xl">{{ $jumlahNotaris }}</p>
                     </div>
                     <div class="font-bold">Update Hari Ini</div>
                 </div>
@@ -37,7 +37,7 @@
                 <div class="flex flex-col gap-y-4">
                     <div class="font-bold text-white">
                         <p class="text-sm">DOKUMEN PPAT</p>
-                        <p class="text-4xl">20</p>
+                        <p class="text-4xl">{{ $jumlahPpat }}</p>
                     </div>
                     <div class="font-bold">Update Hari Ini</div>
                 </div>
@@ -56,7 +56,7 @@
                 <div class="flex flex-col gap-y-4">
                     <div class="font-bold text-white">
                         <p class="text-sm">SURAT MASUK</p>
-                        <p class="text-4xl">200</p>
+                        <p class="text-4xl">{{ $jumlahSuratMasuk }}</p>
                     </div>
                     <div class="font-bold">Update Hari Ini</div>
                 </div>
@@ -74,8 +74,8 @@
                 class="flex flex-row justify-between p-2 rounded-lg shadow-lg bg-success-500 gap-x-4 shadow-success-500">
                 <div class="flex flex-col gap-y-4">
                     <div class="font-bold text-white">
-                        <p class="text-sm">SURAT MASUK</p>
-                        <p class="text-4xl">200</p>
+                        <p class="text-sm">SURAT Keluar</p>
+                        <p class="text-4xl">{{ $jumlahSuratKeluar }}</p>
                     </div>
                     <div class="font-bold">Update Hari Ini</div>
                 </div>
