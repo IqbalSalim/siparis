@@ -25,26 +25,37 @@
             padding: 8px 4px;
         }
     </style>
+    <style s></style>
 
 </head>
 
 <body class="px-8">
     <div>
-        <table style="width: 100%; padding: 4px 8px; border: none; padding-left: 20px; padding-right: 20px">
+        <table style="width: 100%;   border: none; padding-left: 5px; padding-right: 5px; margin-bottom: 0px">
             <tr style="border: none; ">
-                <td style="padding: 0px; width: 20%; border: none;">
-                    {{-- <img style="width: 140px; padding: 0px;" src="{{ asset('images/logo.png') }}" alt=""> --}}
-                </td>
-                <td style="text-align: center; border: none; width: 60%; padding: 0px;">
-                    <h1 class="text-sm font-medium">Kantor Notaris Dan PPAT</h1>
+
+                <td style="text-align: center; border: none; width: 100%; padding: 0px;">
+                    <h2 class="text-sm font-medium" style="padding: 0px; margin-bottom: 0px">
+                        KANTOR NOTARIS DAN PPAT
+                    </h2>
+                    <h3 class="font-medium " style="margin-top: 0px; margin-bottom: 0px; ">HAKSON
+                        IS ENTE, SH.,M.Kn
+                    </h3>
+                    <p style="margin-top: 0px; margin-bottom: 0px; font-style: italic">Jln.
+                        Daopeyago,
+                        Desa Popodu,
+                        Kecamatan Bolaang Uki,
+                        Kab. Bolaang
+                        Mongondow Selatan</p>
+                    <p style="margin-top: 0px; margin-bottom: 0px; font-style: italic">HP: 081356330005 </p>
+                    <hr style="margin-top: 0px">
                     <h3>Laporan Surat Masuk</h3>
                     <p>Periode: {{ $nama_awal }} - {{ $nama_akhir . ' Tahun '. $tahun}}</p>
                 </td>
-                <td style="text-align: right; font-weight: 500; border: none; padding: 0px; width: 20%">
-                    {{-- {{ $periode }} --}}
-                </td>
+
             </tr>
         </table>
+
 
 
         <div style="padding: 0px 12px; padding-left: 20px; padding-right: 20px">
