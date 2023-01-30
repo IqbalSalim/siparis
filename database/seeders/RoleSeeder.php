@@ -66,6 +66,8 @@ class RoleSeeder extends Seeder
             'olah surat keluar',
             'buat surat notaris',
             'ubah password',
+            'lihat laporan',
+            'cetak laporan',
             'dashboard operator',
         ]);
     }

@@ -23,7 +23,7 @@ class ArsipFactory extends Factory
             'judul_akta' => 'Jual Beli Ini Itu',
             'no_akta' => '1234567',
             'tanggal_akta' => $this->faker->dateTimeThisYear('+12 months')->format('Y-m-d'),
-            'jenis' => 'PPAT',
+            'jenis' => 'NOTARIS',
             'file_cover' => 'cover/cover/dSB1urtElFVpXOlwjhx1REAck4snW4EqUNpLSB5M.jpg',
             'file_isi' => 'files/llISYar4x0wJDvwpyRQygMuoFtL51EycpuXytExD.pdf',
         ];
