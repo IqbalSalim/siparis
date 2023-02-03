@@ -20,7 +20,7 @@ class Notaris extends Component
         return view('livewire.arsip.notaris', [
             'arsips' => ($this->search == null || $this->search == '') ?
                 Arsip::where('jenis', 'like', 'NOTARIS')->latest()->paginate($this->paginate) :
-                Arsip::where('nama_1', 'like', '%' . $this->search . '%')->where('jenis', 'like', 'NOTARIS')->paginate($this->paginate)
+                Arsip::multipleSearch($this->search)->where('jenis', 'like', 'NOTARIS')->paginate($this->paginate)
         ]);
     }
 

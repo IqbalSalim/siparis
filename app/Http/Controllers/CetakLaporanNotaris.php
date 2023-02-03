@@ -19,7 +19,7 @@ class CetakLaporanNotaris extends Controller
         $nama_awal = Carbon::now()->month($bulan_awal)->startOfMonth()->year($tahun)->format('F');
         $nama_akhir = Carbon::now()->month($bulan_awal)->startOfMonth()->year($tahun)->format('F');
 
-        $laporan = Arsip::where('jenis', 'like', 'NOTARIS')->whereBetween('created_at', [$tanggal_awal, $tanggal_akhir])->latest()->get()->toArray();
+        $laporan = Arsip::where('jenis', 'like', 'NOTARIS')->whereBetween('tanggal_akta', [$tanggal_awal, $tanggal_akhir])->latest()->get()->toArray();
         // share data to view
         $data = [
             'laporan' => $laporan,

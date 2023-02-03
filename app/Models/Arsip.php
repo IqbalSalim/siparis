@@ -19,4 +19,12 @@ class Arsip extends Model
         'file_cover',
         'file_isi',
     ];
+
+    public function scopeMultipleSearch($query, $search)
+    {
+        return $query->where('nama_1', 'like', '%' . $search . '%')
+            ->orWhere('nama_2', 'like', '%' . $search . '%')
+            ->orWhere('judul_akta', 'like', '%' . $search . '%')
+            ->orWhere('no_akta', 'like', '%' . $search . '%');
+    }
 }

@@ -21,7 +21,7 @@ class Ppat extends Component
         return view('livewire.arsip.ppat', [
             'arsips' => ($this->search == null || $this->search == '') ?
                 Arsip::where('jenis', 'like', 'PPAT')->latest()->paginate($this->paginate) :
-                Arsip::where('nama_1', 'like', '%' . $this->search . '%')->where('jenis', 'like', 'PPAT')->paginate($this->paginate)
+                Arsip::multipleSearch($this->search)->where('jenis', 'like', 'PPAT')->paginate($this->paginate)
         ]);
     }
 
