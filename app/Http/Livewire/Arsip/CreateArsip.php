@@ -26,23 +26,25 @@ class CreateArsip extends Component
     {
         $this->textOCR = new TesseractOCR(public_path('storage/cover/' . $idImage));
         $text = $this->textOCR->run();
+        // dd($text);
         if ($text !== null || $text !== '') {
 
             $baris = explode("\n", $text);
 
-            $row1 = explode(": ", $baris[8]);
-            $row2 = explode(": ", $baris[9]);
-            $row3 = explode(": ", $baris[10]);
-            $row4 = explode(": ", $baris[11]);
-            $row5 = explode(": ", $baris[12]);
-            $row6 = explode(": ", $baris[13]);
 
-            $this->pihakPertama = $row1[1];
-            $this->pihakKedua = $row2[1];
-            $this->judulAkta = $row3[1];
-            $this->noAkta = $row4[1];
-            $this->tanggalAkta = $row5[1];
-            $this->jenis = $row6[1];
+            $row1 = explode("PERTAMA", $baris[8]);
+            $row2 = explode("KEDUA", $baris[9]);
+            $row3 = explode("AKTA", $baris[10]);
+            $row4 = explode("AKTA", $baris[11]);
+            $row5 = explode("AKTA", $baris[12]);
+            $row6 = explode("JENIS", $baris[13]);
+
+            $this->pihakPertama = trim($row1[1]);
+            $this->pihakKedua = trim($row2[1]);
+            $this->judulAkta = trim($row3[1]);
+            $this->noAkta = trim($row4[1]);
+            $this->tanggalAkta = trim($row5[1]);
+            $this->jenis = trim($row6[1]);
             if ($this->jenis == 'ppat' || $this->jenis == 'Ppat' || $this->jenis == 'PPAT') {
                 $this->jenis = 'PPAT';
             } else {
