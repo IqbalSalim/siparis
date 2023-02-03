@@ -29,7 +29,7 @@ class LaporanPpat extends Component
     {
         $tanggal_awal = Carbon::now()->month($this->bulan_awal)->startOfMonth()->year($this->tahun)->format('Y-m-d H:i:s');
         $tanggal_akhir = Carbon::now()->month($this->bulan_akhir)->endOfMonth()->year($this->tahun)->format('Y-m-d H:i:s');
-        $this->arsips = Arsip::where('jenis', 'like', 'PPAT')->whereBetween('created_at', [$tanggal_awal, $tanggal_akhir])->latest()->get();
+        $this->arsips = Arsip::where('jenis', 'like', 'PPAT')->whereBetween('tanggal_akta', [$tanggal_awal, $tanggal_akhir])->latest()->get();
         $this->render();
     }
 }
