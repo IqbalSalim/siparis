@@ -33,10 +33,10 @@
                         </a>
                     </div>
                 </div>
-                <div class="flex flex-row items-center mt-2 gap-x-8">
+                <div class="flex flex-row items-end mt-2 gap-x-8">
                     <div>
-                        <label for="bulan_awal" class="sr-only">Bulan Awal</label>
-                        <select wire:model='bulan_awal' class="accent-secondary-500">
+                        <label for="bulan_awal" class="text-sm">Bulan Awal</label>
+                        <select wire:model='bulan_awal' class="text-sm accent-secondary-500">
                             <option value="">-- Bulan Awal --</option>
                             <option value="1">Januari</option>
                             <option value="2">Februari</option>
@@ -53,8 +53,8 @@
                         </select>
                     </div>
                     <div>
-                        <label for="bulan_akhir" class="sr-only">Bulan Akhir</label>
-                        <select wire:model='bulan_akhir' class="accent-secondary-500">
+                        <label for="bulan_akhir" class="text-sm">Bulan Akhir</label>
+                        <select wire:model='bulan_akhir' class="text-sm accent-secondary-500">
                             <option value="">-- Bulan Akhir --</option>
                             <option value="1">Januari</option>
                             <option value="2">Februari</option>
@@ -71,12 +71,9 @@
                         </select>
                     </div>
                     <div>
-                        <label for="tahun" class="sr-only">Tahun</label>
-                        <select wire:model='tahun' class="accent-secondary-500">
-                            <option value="">-- Pilih Tahun --</option>
-                            <option value="2022">2022</option>
-                            <option value="2023">2023</option>
-                        </select>
+                        <label for="tahun" class="text-sm">Tahun</label>
+                        <input type="number" min="2016" max="2045" wire:model='tahun'
+                            class="text-sm accent-secondary-500" />
                     </div>
                     <div>
                         <button class="btn-secondary btn-icon" wire:click.defer='filter'>
