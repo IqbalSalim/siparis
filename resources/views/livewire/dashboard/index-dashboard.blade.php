@@ -106,13 +106,10 @@
         <div class="grid grid-cols-2 mt-4 gap-x-10">
             <div class="relative p-4 bg-white border shadow-md sm:rounded-lg">
                 <div class="w-40">
-                    <label for="tahunNotaris" class="sr-only">Tahun</label>
-                    <select wire:model='tahunNotaris' wire:change='notarisTahunChange'
-                        class="text-sm accent-primary-500 border-primary-300 text-primary-500 focus:border-primary-300 focus:ring focus:ring-primary-200">
-                        <option value="">-- Pilih Tahun --</option>
-                        <option value="2022">2022</option>
-                        <option value="2023">2023</option>
-                    </select>
+                    <label for="tahunNotaris" class="text-primary-500">Tahun</label>
+                    <input type="number" min="2016" max="2045" wire:model='tahunNotaris'
+                        wire:change='notarisTahunChange'
+                        class="text-sm accent-primary-500 border-primary-300 text-primary-500 focus:border-primary-300 focus:ring focus:ring-primary-200" />
                 </div>
                 <div class="col-span-1 bg-white rounded-lg" style="height: 28rem;">
                     <livewire:livewire-column-chart :column-chart-model="$notaris" key="{{ $notaris->reactiveKey() }}">
@@ -121,13 +118,9 @@
             </div>
             <div class="relative p-4 bg-white border shadow-md sm:rounded-lg">
                 <div class="w-40">
-                    <label for="tahunPpat" class="sr-only">Tahun</label>
-                    <select wire:model='tahunPpat' wire:change='notarisTahunChange'
-                        class="text-sm accent-success-500 border-success-300 text-success-500 focus:border-success-300 focus:ring focus:ring-success-200">
-                        <option value="">-- Pilih Tahun --</option>
-                        <option value="2022">2022</option>
-                        <option value="2023">2023</option>
-                    </select>
+                    <label for="tahunPpat" class="text-success-500">Tahun</label>
+                    <input type="number" min="2016" max="2045" wire:model='tahunPpat' wire:change='notarisTahunChange'
+                        class="text-sm accent-success-500 border-success-300 text-success-500 focus:border-success-300 focus:ring focus:ring-success-200" />
                 </div>
                 <div class="col-span-1 bg-white rounded-lg" style="height: 28rem;">
                     <livewire:livewire-column-chart :column-chart-model="$ppat" key="{{ $ppat->reactiveKey() }}">
