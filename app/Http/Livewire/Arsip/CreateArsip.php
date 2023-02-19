@@ -11,6 +11,7 @@ use Livewire\Component;
 use thiagoalessio\TesseractOCR\TesseractOCR;
 use Livewire\WithFileUploads;
 use Spatie\PdfToImage\Pdf;
+use Illuminate\Support\Str;
 // use Org_Heigl\Ghostscript\Ghostscript;
 
 class CreateArsip extends Component
@@ -26,31 +27,53 @@ class CreateArsip extends Component
     {
         $this->textOCR = new TesseractOCR(public_path('storage/cover/' . $idImage));
         $text = $this->textOCR->run();
-        // dd($text);
+        $row1 = null;
+        $row2 = null;
+        $row3 = null;
+        $row4 = null;
+        $row5 = null;
+        $row6 = null;
         if ($text !== null || $text !== '') {
 
             $baris = explode("\n", $text);
 
-
-            $row1 = explode("PERTAMA", $baris[8]);
-            $row2 = explode("KEDUA", $baris[9]);
-            $row3 = explode("AKTA", $baris[10]);
-            $row4 = explode("AKTA", $baris[11]);
-            $row5 = explode("AKTA", $baris[12]);
-            $row6 = explode("JENIS", $baris[13]);
-
-            $this->pihakPertama = trim($row1[1]);
-            $this->pihakKedua = trim($row2[1]);
-            $this->judulAkta = trim($row3[1]);
-            $this->noAkta = trim($row4[1]);
-            $this->tanggalAkta = trim($row5[1]);
-            $this->jenis = trim($row6[1]);
-            if ($this->jenis == 'ppat' || $this->jenis == 'Ppat' || $this->jenis == 'PPAT') {
-                $this->jenis = 'PPAT';
-            } else {
-                $this->jenis = 'NOTARIS';
+            // dd($baris);
+            foreach ($baris as $key => $row) {
+                if (Str::contains($row, 'PERTAMA')) {
+                    $row1 = explode("PERTAMA", $row);
+                    foreach ($row1 as $baris) {
+                        $result = preg_replace("/[^a-zA-Z]/", "", $baris);
+                        $this->pihakPertama = $result;
+                    }
+                } elseif (Str::contains($row, 'KEDUA')) {
+                    $row2 = explode("KEDUA", $row);
+                    foreach ($row2 as $baris) {
+                        $result = preg_replace("/[^a-zA-Z]/", "", $baris);
+                        $this->pihakKedua = $result;
+                    }
+                } elseif (Str::contains($row, 'JUDUL')) {
+                    $row3 = explode("AKTA", $row);
+                    foreach ($row3 as $baris) {
+                        $this->judulAkta = trim($baris);
+                    }
+                } elseif (Str::contains($row, 'NO AKTA')) {
+                    $row4 = explode("AKTA", $row);
+                    foreach ($row4 as $baris) {
+                        $this->noAkta = trim($baris);
+                    }
+                } elseif (Str::contains($row, 'JENIS')) {
+                    $row6 = explode("JENIS", $row);
+                    foreach ($row6 as $baris) {
+                        $this->jenis = trim($baris);
+                    }
+                    if ($this->jenis == 'ppat' || $this->jenis == 'Ppat' || $this->jenis == 'PPAT') {
+                        $this->jenis = 'PPAT';
+                    } else {
+                        $this->jenis = 'NOTARIS';
+                    }
+                }
             }
-
+            // dd($keynote);
             $this->fileCover = 'cover/' . $idImage;
         }
     }
