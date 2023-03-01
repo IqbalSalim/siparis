@@ -42,14 +42,14 @@ class CreateArsip extends Component
                 if (Str::contains($row, 'PERTAMA')) {
                     $row1 = explode("PERTAMA", $row);
                     foreach ($row1 as $baris) {
-                        $result = preg_replace("/[^a-zA-Z]/", "", $baris);
-                        $this->pihakPertama = $result;
+                        $result = preg_replace("/[^a-zA-Z0-9\. ,]/", "", $baris);
+                        $this->pihakPertama = trim($result);
                     }
                 } elseif (Str::contains($row, 'KEDUA')) {
                     $row2 = explode("KEDUA", $row);
                     foreach ($row2 as $baris) {
-                        $result = preg_replace("/[^a-zA-Z]/", "", $baris);
-                        $this->pihakKedua = $result;
+                        $result = preg_replace("/[^a-zA-Z0-9\. ,]/", "", $baris);
+                        $this->pihakKedua = trim($result);
                     }
                 } elseif (Str::contains($row, 'JUDUL')) {
                     $row3 = explode("AKTA", $row);
