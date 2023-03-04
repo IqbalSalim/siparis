@@ -60,7 +60,7 @@ class CreateArsip extends Component
                 } elseif (Str::contains($row, 'NO AKTA')) {
                     $row4 = explode("AKTA", $row);
                     foreach ($row4 as $baris) {
-                        $result = preg_replace("/[^a-zA-Z0-9\. ,]/", "", $baris);
+                        $result = preg_replace("/[^a-zA-Z0-9\. , \/]/", "", $baris);
                         $this->noAkta = trim($result);
                     }
                 } elseif (Str::contains($row, 'JENIS')) {
