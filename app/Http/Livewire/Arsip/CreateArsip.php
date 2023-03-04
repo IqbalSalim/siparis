@@ -42,7 +42,7 @@ class CreateArsip extends Component
                 if (Str::contains($row, 'PERTAMA')) {
                     $row1 = explode("PERTAMA", $row);
                     foreach ($row1 as $baris) {
-                        $result = preg_replace("/[^a-zA-Z0-9\. ,]/", "", $baris);
+                        $result = preg_replace("/[^a-zA-Z0-9_ .,]/", "", $baris);
                         $this->pihakPertama = trim($result);
                     }
                 } elseif (Str::contains($row, 'KEDUA')) {
@@ -54,12 +54,14 @@ class CreateArsip extends Component
                 } elseif (Str::contains($row, 'JUDUL')) {
                     $row3 = explode("AKTA", $row);
                     foreach ($row3 as $baris) {
-                        $this->judulAkta = trim($baris);
+                        $result = preg_replace("/[^a-zA-Z0-9\. ,]/", "", $baris);
+                        $this->judulAkta = trim($result);
                     }
                 } elseif (Str::contains($row, 'NO AKTA')) {
                     $row4 = explode("AKTA", $row);
                     foreach ($row4 as $baris) {
-                        $this->noAkta = trim($baris);
+                        $result = preg_replace("/[^a-zA-Z0-9\. ,]/", "", $baris);
+                        $this->noAkta = trim($result);
                     }
                 } elseif (Str::contains($row, 'JENIS')) {
                     $row6 = explode("JENIS", $row);
@@ -93,7 +95,7 @@ class CreateArsip extends Component
                 'pihakPertama' => 'required|string|max:255',
                 'pihakKedua' => 'required|string|max:255',
                 'judulAkta' => 'required|string|max:255',
-                'noAkta' => 'required|string|max:255',
+                'noAkta' => 'required|string|max:255|unique:arsips,no_akta',
             ],
             [],
             [

@@ -39,7 +39,15 @@
                     <tr
                         class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                         <th>No Akta</th>
-                        <td><input type="text" class="my-1" name="noAkta" wire:model.defer='noAkta'></td>
+                        <td>
+                            <input type="text" class="my-1" name="noAkta" wire:model.defer='noAkta'>
+                            <span class="text-xs text-red-700">
+                                @error('noAkta')
+                                {{ $message }}
+                                @enderror
+                            </span>
+                        </td>
+
                     </tr>
                     <tr
                         class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
@@ -74,7 +82,7 @@
                         <label for="nama">File Arsip</label>
                         <input type="file" wire:model.defer='fileArsip' class="mt-1">
                         <span class="text-xs text-red-700">
-                            @error('name')
+                            @error('fileArsip')
                             {{ $message }}
                             @enderror
                         </span>

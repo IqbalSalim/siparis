@@ -21,7 +21,7 @@ class ArsipFactory extends Factory
             'nama_1' => $this->faker->name(),
             'nama_2' => $this->faker->name(),
             'judul_akta' => 'Jual Beli Ini Itu',
-            'no_akta' => '1234567',
+            'no_akta' => $this->faker->text(10),
             'tanggal_akta' => $this->faker->dateTimeThisYear('+12 months')->format('Y-m-d'),
             'jenis' => 'NOTARIS',
             'file_cover' => 'cover/cover/dSB1urtElFVpXOlwjhx1REAck4snW4EqUNpLSB5M.jpg',

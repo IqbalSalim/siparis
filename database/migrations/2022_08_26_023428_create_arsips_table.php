@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('nama_1');
             $table->string('nama_2');
             $table->string('judul_akta');
-            $table->string('no_akta');
+            $table->string('no_akta')->unique();
             $table->date('tanggal_akta');
             $table->string('jenis');
             $table->string('file_cover');
