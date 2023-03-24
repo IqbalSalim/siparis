@@ -12,6 +12,7 @@ use thiagoalessio\TesseractOCR\TesseractOCR;
 use Livewire\WithFileUploads;
 use Spatie\PdfToImage\Pdf;
 use Illuminate\Support\Str;
+use Intervention\Image\Facades\Image;
 // use Org_Heigl\Ghostscript\Ghostscript;
 
 class CreateArsip extends Component
@@ -25,17 +26,48 @@ class CreateArsip extends Component
 
     public function mount($idImage)
     {
-        $this->textOCR = new TesseractOCR(public_path('storage/cover/' . $idImage));
-        $text = $this->textOCR->run();
+        $imagepath = public_path('storage/cover/' . $idImage);
+
+        $derajat = 360;
+        for ($i = 0; $i <= $derajat; $i++) {
+            try {
+                // $destinationPath = public_path('images/');
+                $image = Image::make($imagepath);
+                $image->rotate($i);
+                $path1 = $image->save(public_path('storage/temp/' . $idImage));
+
+                $this->textOCR = new TesseractOCR(public_path('storage/temp/' . $idImage));
+                $text = $this->textOCR->lang('eng')->run();
+                $baris = explode("\n", $text);
+                $status = false;
+                if (count($baris) >= 23 && count($baris) <= 26) {
+                    foreach ($baris as $key => $row) {
+                        if (Str::contains($row, 'PERTAMA')) {
+                            $status = true;
+                        }
+                    }
+                    if ($status) {
+                        break;
+                    }
+                }
+            } catch (Exception $e) {
+                continue;
+            }
+        }
+
         $row1 = null;
         $row2 = null;
         $row3 = null;
         $row4 = null;
         $row5 = null;
         $row6 = null;
+
+
+
         if ($text !== null || $text !== '') {
 
-            $baris = explode("\n", $text);
+            // $baris = explode("\n", $text);
+
 
             // dd($baris);
             foreach ($baris as $key => $row) {
