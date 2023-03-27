@@ -39,8 +39,9 @@ class CreateArsip extends Component
                 $this->textOCR = new TesseractOCR(public_path('storage/temp/' . $idImage));
                 $text = $this->textOCR->lang('eng')->run();
                 $baris = explode("\n", $text);
+
                 $status = false;
-                if (count($baris) >= 23 && count($baris) <= 26) {
+                if (count($baris) >= 23 && count($baris) <= 27) {
                     foreach ($baris as $key => $row) {
                         if (Str::contains($row, 'PERTAMA')) {
                             $status = true;
@@ -65,11 +66,6 @@ class CreateArsip extends Component
 
 
         if ($text !== null || $text !== '') {
-
-            // $baris = explode("\n", $text);
-
-
-            // dd($baris);
             foreach ($baris as $key => $row) {
                 if (Str::contains($row, 'PERTAMA')) {
                     $row1 = explode("PERTAMA", $row);
@@ -107,7 +103,6 @@ class CreateArsip extends Component
                     }
                 }
             }
-            // dd($keynote);
             $this->fileCover = 'cover/' . $idImage;
         }
     }
