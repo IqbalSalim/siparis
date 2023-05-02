@@ -28,7 +28,7 @@ class CreateArsip extends Component
     {
         $imagepath = public_path('storage/cover/' . $idImage);
 
-        $derajat = 360;
+        $derajat = 90;
         for ($i = 0; $i <= $derajat; $i++) {
             try {
                 // $destinationPath = public_path('images/');
@@ -39,6 +39,7 @@ class CreateArsip extends Component
                 $this->textOCR = new TesseractOCR(public_path('storage/temp/' . $idImage));
                 $text = $this->textOCR->lang('eng')->run();
                 $baris = explode("\n", $text);
+                // dd($baris);
 
                 $status = false;
                 if (count($baris) >= 23 && count($baris) <= 27) {
@@ -49,6 +50,24 @@ class CreateArsip extends Component
                     }
                     if ($status) {
                         break;
+                    }
+                } else {
+                    $image = Image::make($imagepath);
+                    $image->rotate(-$i);
+                    $path1 = $image->save(public_path('storage/temp/' . $idImage));
+
+                    $this->textOCR = new TesseractOCR(public_path('storage/temp/' . $idImage));
+                    $text = $this->textOCR->lang('eng')->run();
+                    $baris = explode("\n", $text);
+                    if (count($baris) >= 23 && count($baris) <= 27) {
+                        foreach ($baris as $key => $row) {
+                            if (Str::contains($row, 'PERTAMA')) {
+                                $status = true;
+                            }
+                        }
+                        if ($status) {
+                            break;
+                        }
                     }
                 }
             } catch (Exception $e) {
