@@ -21,6 +21,7 @@ use App\Http\Livewire\User\IndexUser;
 use GuzzleHttp\Middleware;
 use Illuminate\Support\Facades\Route;
 
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes

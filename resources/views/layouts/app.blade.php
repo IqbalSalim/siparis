@@ -52,6 +52,16 @@
             });
         });
 
+        window.addEventListener('swal:error-time', event => {
+            swal({
+                title: event.detail.message,
+                text: event.detail.text,
+                icon: event.detail.type,
+                buttons: false,
+                timer: event.detail.timer,
+            });
+        });
+
         window.addEventListener('swal:success-redirect', event => {
             swal({
                 title: event.detail.message,

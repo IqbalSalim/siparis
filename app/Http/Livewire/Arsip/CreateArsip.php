@@ -19,16 +19,17 @@ class CreateArsip extends Component
 {
     use WithFileUploads;
 
-    public $fileArsip, $fileCover;
+    public $fileArsip, $fileCover, $status = false, $prevUrl = "";
     public $pihakPertama = "", $pihakKedua = "", $judulAkta = "", $noAkta = "", $tanggalAkta = "", $jenis = "";
     private $textOCR;
     public $url;
 
     public function mount($idImage)
     {
+        $this->prevUrl = url()->previous();
         $imagepath = public_path('storage/cover/' . $idImage);
 
-        $derajat = 90;
+        $derajat = 2;
         for ($i = 0; $i <= $derajat; $i++) {
             try {
                 // $destinationPath = public_path('images/');
@@ -41,14 +42,14 @@ class CreateArsip extends Component
                 $baris = explode("\n", $text);
                 // dd($baris);
 
-                $status = false;
+                $this->status = false;
                 if (count($baris) >= 23 && count($baris) <= 27) {
                     foreach ($baris as $key => $row) {
                         if (Str::contains($row, 'PERTAMA')) {
-                            $status = true;
+                            $this->status = true;
                         }
                     }
-                    if ($status) {
+                    if ($this->status) {
                         break;
                     }
                 } else {
@@ -62,10 +63,10 @@ class CreateArsip extends Component
                     if (count($baris) >= 23 && count($baris) <= 27) {
                         foreach ($baris as $key => $row) {
                             if (Str::contains($row, 'PERTAMA')) {
-                                $status = true;
+                                $this->status = true;
                             }
                         }
-                        if ($status) {
+                        if ($this->status) {
                             break;
                         }
                     }
@@ -74,6 +75,8 @@ class CreateArsip extends Component
                 continue;
             }
         }
+
+
 
         $row1 = null;
         $row2 = null;
@@ -128,11 +131,13 @@ class CreateArsip extends Component
 
     public function render()
     {
+
         return view('livewire.arsip.create-arsip');
     }
 
     public function uploadFile()
     {
+
         $this->validate(
             [
                 'fileArsip' => 'required|file|mimes:pdf',
@@ -192,6 +197,19 @@ class CreateArsip extends Component
                 'type' => 'error',
                 'message' => 'Terjadi Kesalahan!',
                 'text' => 'silahkan periksa kembali inputan atau hubungi developer.'
+            ]);
+        }
+    }
+
+    public function cekFalse()
+    {
+
+        if ($this->status == false) {
+            $this->dispatchBrowserEvent('swal:error-time', [
+                'type' => 'error',
+                'message' => 'Format Cover Tidak Sesuai!',
+                'text' => 'Periksa lagi format cover Anda!',
+                'timer' => 3000
             ]);
         }
     }

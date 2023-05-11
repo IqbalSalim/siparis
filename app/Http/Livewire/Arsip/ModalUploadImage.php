@@ -13,6 +13,7 @@ class ModalUploadImage extends Component
     public $fileCover;
     public $textOCR;
 
+
     public function render()
     {
         return view('livewire.arsip.modal-upload-image');
