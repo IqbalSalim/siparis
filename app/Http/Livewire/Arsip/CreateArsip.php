@@ -29,7 +29,7 @@ class CreateArsip extends Component
         $this->prevUrl = url()->previous();
         $imagepath = public_path('storage/cover/' . $idImage);
 
-        $derajat = 2;
+        $derajat = 90;
         for ($i = 0; $i <= $derajat; $i++) {
             try {
                 // $destinationPath = public_path('images/');
@@ -205,11 +205,11 @@ class CreateArsip extends Component
     {
 
         if ($this->status == false) {
-            $this->dispatchBrowserEvent('swal:error-time', [
+            $this->dispatchBrowserEvent('swal:error-confirm', [
                 'type' => 'error',
                 'message' => 'Format Cover Tidak Sesuai!',
                 'text' => 'Periksa lagi format cover Anda!',
-                'timer' => 3000
+                'url' => $this->prevUrl
             ]);
         }
     }

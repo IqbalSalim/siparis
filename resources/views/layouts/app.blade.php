@@ -52,14 +52,26 @@
             });
         });
 
-        window.addEventListener('swal:error-time', event => {
+        window.addEventListener('swal:error-confirm', event => {
             swal({
                 title: event.detail.message,
                 text: event.detail.text,
                 icon: event.detail.type,
-                buttons: false,
-                timer: event.detail.timer,
-            });
+                buttons: {
+                    cancel: "Input Manual",
+                    catch: {
+                        text: "Coba Lagi Input Cover",
+                        value: "catch",
+                    }, 
+                }
+
+            }).then((value)  => {
+                if(value == "catch"){
+                    window.location = event.detail.url
+                }else{
+                    swal("Silahkan Input Manual..");
+                }
+            })
         });
 
         window.addEventListener('swal:success-redirect', event => {

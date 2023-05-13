@@ -98,9 +98,9 @@
     <script>
         document.addEventListener('livewire:load', function () {
             @this.cekFalse()
-            setTimeout(() => {
-                window.location = @this.prevUrl
-            }, 3000);
+            // setTimeout(() => {
+            //     window.location = @this.prevUrl
+            // }, 3000);
         })
     </script>
 </div>

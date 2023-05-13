@@ -49,10 +49,8 @@ class CreateSuratKeluar extends Component
         $this->file = $this->file->store('surat_keluar', 'public');
 
         try {
-            // Transaction
-            $exception = DB::transaction(function () {
-                // Do your SQL here
 
+            $exception = DB::transaction(function () {
                 $this->no_agenda = 1;
                 $noagenda = SuratKeluar::latest('no_agenda')->first();
                 if ($noagenda !== null) {
