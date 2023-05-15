@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\User;
 
+use App\Models\Karyawan;
 use App\Models\User;
 use Exception;
 use Illuminate\Support\Facades\DB;
@@ -20,12 +21,12 @@ class EditUser extends Component
     public function getUser($id)
     {
         $user = User::find($id);
-        $this->name = $user->name;
-        $this->jenis_kelamin = $user->jenis_kelamin;
-        $this->no_telpon = $user->no_telpon;
-        $this->alamat = $user->alamat;
+        $this->name = $user->karyawan->nama;
+        $this->jenis_kelamin = $user->karyawan->jenis_kelamin;
+        $this->no_telpon = $user->karyawan->no_telpon;
+        $this->alamat = $user->karyawan->alamat;
         $this->email = $user->email;
-        $this->foto_preview = $user->foto;
+        $this->foto_preview = $user->karyawan->foto;
         $this->userId = $id;
     }
 
@@ -54,7 +55,7 @@ class EditUser extends Component
         $fotolama = '';
         if ($this->foto !== null) {
             $foto = $this->foto->store('foto', 'public');
-            $fotolama = $user->foto;
+            $fotolama = $user->karyawan->foto;
         } else {
             $foto = $this->foto_preview;
         }
@@ -63,11 +64,14 @@ class EditUser extends Component
             // Transaction
             $exception = DB::transaction(function () use ($id, $foto, $fotolama) {
                 User::find($id)->update([
-                    'name' => $this->name,
+                    'email' => $this->email,
+                ]);
+
+                Karyawan::where('user_id', $id)->first()->update([
+                    'nama' => $this->name,
                     'jenis_kelamin' => $this->jenis_kelamin,
                     'no_telpon' => $this->no_telpon,
                     'alamat' => $this->alamat,
-                    'email' => $this->email,
                     'foto' => $foto,
                 ]);
             });

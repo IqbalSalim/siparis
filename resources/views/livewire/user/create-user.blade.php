@@ -1,7 +1,7 @@
 <div>
     <div x-show="createModal"
         class="fixed top-0 left-0 right-0 z-50 flex items-center w-full overflow-x-hidden overflow-y-auto bg-black bg-opacity-50 md:inset-0 h-modal md:h-full">
-        <div class="relative w-full h-full max-w-xl p-4 mx-auto md:h-auto">
+        <div class="relative w-full h-full max-w-4xl p-4 mx-auto md:h-auto">
             <!-- Modal content -->
             <div
                 class="relative my-auto transition duration-150 ease-in-out bg-white rounded-lg shadow dark:bg-gray-800">
@@ -18,17 +18,17 @@
                     <form class="space-y-6" wire:submit.prevent="store" novalidate>
                         @csrf
                         <div class="flex flex-col space-y-4">
-                            <div>
-                                <label for="nama">Nama</label>
-                                <input type="text" wire:model.defer='name' id="nama" class="mt-1">
-                                <span class="text-xs text-red-700">
-                                    @error('name')
-                                    {{ $message }}
-                                    @enderror
-                                </span>
-                            </div>
                             <div class="flex gap-x-4">
                                 <div class="flex-1">
+                                    <label for="nama">Nama</label>
+                                    <input type="text" wire:model.defer='name' id="nama" class="mt-1">
+                                    <span class="text-xs text-red-700">
+                                        @error('name')
+                                        {{ $message }}
+                                        @enderror
+                                    </span>
+                                </div>
+                                <div class="">
                                     <label for="jenis_kelamin">Jenis Kelamin</label>
                                     <select wire:model.defer='jenis_kelamin' id="jenis_kelamin" class="mt-1">
                                         <option value="">-- Pilih Jenis Kelamin --</option>
@@ -41,6 +41,8 @@
                                         @enderror
                                     </span>
                                 </div>
+                            </div>
+                            <div class="flex gap-x-4">
                                 <div class="flex-1">
                                     <label for="no_telpon">No Telepon</label>
                                     <input type="text" wire:model.defer='no_telpon' id="no_telpon" class="mt-1">

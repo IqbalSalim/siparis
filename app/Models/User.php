@@ -19,11 +19,6 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'name',
-        'jenis_kelamin',
-        'no_telpon',
-        'alamat',
-        'foto',
         'email',
         'password',
     ];
@@ -46,4 +41,9 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function karyawan()
+    {
+        return $this->hasOne(Karyawan::class);
+    }
 }

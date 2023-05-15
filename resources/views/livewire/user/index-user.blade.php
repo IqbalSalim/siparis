@@ -87,20 +87,21 @@
                             <div class="flex items-center gap-x-2">
                                 <div class="w-14 h-14 ">
                                     <img class="object-cover rounded-lg"
-                                        src="{{ $row->foto !== '' ? asset('storage/'.$row->foto) : asset('assets/images/default-user.png') }}"
+                                        src="{{ $row->karyawan()->first()->foto  !== '' ? asset('storage/'.$row->karyawan()->first()->foto) : asset('assets/images/default-user.png') }}"
                                         alt="Foto User">
                                 </div>
                                 <div class="flex flex-col gap-y-0">
-                                    <span class="font-bold uppercase text-secondary-500">{{ $row->name }}</span>
+                                    <span class="font-bold uppercase text-secondary-500">{{
+                                        $row->karyawan()->first()->nama }}</span>
                                     <span class="font-bold">{{ $row->email }}</span>
                                 </div>
                             </div>
                         </td>
                         <td class="px-6 py-4">
-                            {{ $row->no_telpon }}
+                            {{ $row->karyawan()->first()->no_telpon }}
                         </td>
                         <td class="px-6 py-4">
-                            {{ $row->alamat }}
+                            {{$row->karyawan()->first()->alamat }}
                         </td>
                         <td class="px-6 py-4 font-bold uppercase text-secondary-500">
                             {{ $row->getRoleNames()[0] }}

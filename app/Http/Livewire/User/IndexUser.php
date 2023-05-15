@@ -23,7 +23,11 @@ class IndexUser extends Component
                 User::whereHas('roles', function ($q) {
                     $q->whereNot('name', 'admin');
                 })->latest()->paginate($this->paginate) :
-                User::where('name', 'like', '%' . $this->search . '%')->paginate($this->paginate)
+                User::whereHas('roles', function ($q) {
+                    $q->whereNot('name', 'admin');
+                })->whereHas('karyawan', function ($q) {
+                    $q->where('nama', 'like', '%' . $this->search . '%');
+                })->paginate($this->paginate)
         ]);
     }
 

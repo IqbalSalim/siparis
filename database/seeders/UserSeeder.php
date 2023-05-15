@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Karyawan;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
@@ -19,7 +20,7 @@ class UserSeeder extends Seeder
     {
         $users = [
             [
-                'name' => 'Dayat Ente',
+                'nama' => 'Noor Hidayat Ente, S.H, M.H',
                 'jenis_kelamin' => 'Laki-laki',
                 'no_telpon' => '082345345332',
                 'alamat' => 'Jln Dewi Sartika, Samping Kampus 1 UNG',
@@ -29,7 +30,7 @@ class UserSeeder extends Seeder
                 'role' => 'admin',
             ],
             [
-                'name' => 'Iqbal Salim',
+                'nama' => 'Al Iqbal Bin Salim, S.Kom',
                 'jenis_kelamin' => 'Laki-laki',
                 'no_telpon' => '082271131552',
                 'alamat' => 'Jln Analisa, Kel. Tumbihe, Kec. Kabila, Kab. Bone Bolango',
@@ -41,14 +42,18 @@ class UserSeeder extends Seeder
         ];
 
         foreach ($users as $row) {
-            User::create([
-                'name' => $row['name'],
+            $user = User::create([
+                'email' => $row['email'],
+                'password' => Hash::make($row['password']),
+            ]);
+
+            Karyawan::create([
+                'user_id' => $user->id,
+                'nama' => $row['nama'],
                 'jenis_kelamin' => $row['jenis_kelamin'],
                 'no_telpon' => $row['no_telpon'],
                 'alamat' => $row['alamat'],
-                'email' => $row['email'],
                 'foto' => $row['foto'],
-                'password' => Hash::make($row['password']),
             ]);
 
             $role = Role::where('name', $row['role'])->first();

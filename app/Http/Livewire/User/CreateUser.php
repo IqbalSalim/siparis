@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\User;
 
+use App\Models\Karyawan;
 use App\Models\User;
 use Exception;
 use Illuminate\Support\Facades\DB;
@@ -63,13 +64,17 @@ class CreateUser extends Component
             $exception = DB::transaction(function () use ($foto) {
                 // Do your SQL here
                 $user = User::create([
-                    'name' => $this->name,
+                    'email' => $this->email,
+                    'password' => Hash::make('password')
+                ]);
+
+                Karyawan::create([
+                    'user_id' => $user->id,
+                    'nama' => $this->name,
                     'jenis_kelamin' => $this->jenis_kelamin,
                     'no_telpon' => $this->no_telpon,
                     'alamat' => $this->alamat,
-                    'email' => $this->email,
                     'foto' => $foto,
-                    'password' => Hash::make('password')
                 ]);
 
                 $role = Role::where('name', 'operator')->first();
@@ -88,6 +93,7 @@ class CreateUser extends Component
                 throw new Exception();
             }
         } catch (Exception $e) {
+            dd($e);
             if (Storage::disk('public')->exists($foto)) {
                 Storage::disk('public')->delete($foto);
             }
