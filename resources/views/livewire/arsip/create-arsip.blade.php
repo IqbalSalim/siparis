@@ -1,4 +1,5 @@
-<div x-cloak x-data="{ editModal: false }" x-on:close-edit-modal="editModal=false">
+<div x-cloak x-data="{ editModal: false, showCover: false }" x-on:close-edit-modal="editModal=false"
+    x-on:close-show-cover="showCover=false">
     <x-slot name="header">
         <h2 class="text-xl font-semibold leading-tight text-primary-500 dark:text-white">
             {{ __('Tambah Arsip') }}
@@ -12,11 +13,18 @@
         </div>
     </x-slot>
 
+    <livewire:arsip.modal-show-template />
 
     <div id="content">
         <div class="flex flex-row space-x-8">
             <div class="w-1/2 p-4 bg-white rounded-lg shadow-lg">
-                <h3 class="text-xl font-bold text-primary-500">Cover File</h3>
+                <div class="flex flex-row justify-between">
+                    <h3 class="text-xl font-bold text-primary-500">Cover File</h3>
+                    <button @click='showCover=true' wire:click.prevent="$emit('getImageCover', '{{ $idImage }}')"
+                        class="underline text-md hover:font-bold text-primary-500">Lihat
+                        Cover
+                        File</button>
+                </div>
                 <p class="mb-4 text-secondary-500">Periksa Kembali Inputan Cover File</p>
                 <table class="w-full pt-4">
                     <tr

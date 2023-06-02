@@ -22,10 +22,11 @@ class CreateArsip extends Component
     public $fileArsip, $fileCover, $status = false, $prevUrl = "";
     public $pihakPertama = "", $pihakKedua = "", $judulAkta = "", $noAkta = "", $tanggalAkta = "", $jenis = "";
     private $textOCR;
-    public $url;
+    public $url, $idImage;
 
     public function mount($idImage)
     {
+        $this->idImage = $idImage;
         $this->prevUrl = url()->previous();
         $imagepath = public_path('storage/cover/' . $idImage);
 
