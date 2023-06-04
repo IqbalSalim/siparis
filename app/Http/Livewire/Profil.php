@@ -21,12 +21,12 @@ class Profil extends Component
 
 
         $user = User::find(Auth::user()->id);
-        $this->name = $user->name;
-        $this->jenis_kelamin = $user->jenis_kelamin;
-        $this->no_telpon = $user->no_telpon;
-        $this->alamat = $user->alamat;
+        $this->name = $user->karyawan->nama;
+        $this->jenis_kelamin = $user->karyawan->jenis_kelamin;
+        $this->no_telpon = $user->karyawan->no_telpon;
+        $this->alamat = $user->karyawan->alamat;
         $this->email = $user->email;
-        $this->foto_preview = $user->foto;
+        $this->foto_preview = $user->karyawan->foto;
         $this->userId = Auth::user()->id;
     }
 

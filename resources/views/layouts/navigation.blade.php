@@ -78,7 +78,7 @@
                     <x-slot name="trigger">
                         <button
                             class="flex items-center text-sm font-bold text-white transition duration-150 ease-in-out hover:text-secondary-300 hover:border-secondary-300 focus:outline-none focus:text-secondary-300 focus:border-secondary-300">
-                            <div>{{ Auth::user()->name }}</div>
+                            <div>{{ Auth::user()->karyawan->nama }}</div>
 
                             <div class="ml-1">
                                 <svg class="w-4 h-4 fill-current" xmlns="http://www.w3.org/2000/svg"
