@@ -1,6 +1,6 @@
-<div x-cloak x-data="{ editModal: false, modalUploadImage:false, modalShowFile:false }"
+<div x-cloak x-data="{ editModal: false, modalUploadImage:false, modalShowFile:false, modalShowCover:false }"
     x-on:close-edit-modal="editModal=false" x-on:close-modal-upload="modalUploadImage=false"
-    x-on:close-show-modal="modalShowFile=false">
+    x-on:close-show-modal="modalShowFile=false" x-on:close-cover-modal="modalShowCover=false">
     <x-slot name="header">
         <h2 class="text-xl font-semibold leading-tight text-primary-500 dark:text-white">
             {{ __('PPAT') }}
@@ -14,6 +14,7 @@
 
     <livewire:arsip.modal-upload-image />
     <livewire:arsip.modal-show-file />
+    <livewire:arsip.modal-show-cover />
 
 
 
@@ -118,6 +119,16 @@
                         </td>
                         <td class="px-6 py-4">
                             <div class="flex flex-row gap-x-2">
+                                <button @click="modalShowCover=true"
+                                    wire:click.prevent="$emit('getCoverArsip', {{ $row->id }})"
+                                    class="px-3 btn-primary">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                        class="w-4 h-4" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                            d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m2.25 0H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" />
+                                    </svg>
+
+                                </button>
                                 <button @click="modalShowFile=true"
                                     wire:click.prevent="$emit('getFileArsip', {{ $row->id }})" class="px-3 btn-primary">
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"

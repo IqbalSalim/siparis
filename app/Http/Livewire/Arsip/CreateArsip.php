@@ -175,7 +175,7 @@ class CreateArsip extends Component
                     'no_akta' => $this->noAkta,
                     'tanggal_akta' => $this->tanggalAkta,
                     'jenis' => $this->jenis,
-                    'file_cover' => 'cover/' . $this->fileCover,
+                    'file_cover' => $this->fileCover,
                     'file_isi' => $this->fileArsip,
                 ]);
             });
